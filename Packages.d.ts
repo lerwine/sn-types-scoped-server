@@ -4270,6 +4270,45 @@ declare namespace Packages {
                 export interface GlideAggregateSandbox extends GlideAggregate {
                 }
 
+                export interface GlideController {
+                    /*
+                        close
+                        enforceSecurity
+                        enforcingSecurity
+                        equals
+                        evaluate
+                        evaluateAsObject
+                        evaluateGeneratedString
+                        evaluateSilent
+                        evaluateString
+                        evaluateStringWithPrefix
+                        exceptionHandler
+                        getClass
+                        getExceptionHandler
+                        getGlobalScope
+                        getSlowEvalWarn
+                        globalScope
+                        hashCode
+                        haveError
+                        interpretedMode
+                        interpretString
+                        isEnforcingSecurity
+                        legacyStrictMode
+                        locate
+                        notify
+                        notifyAll
+                        putAction
+                        setEnforceSecurity
+                        setExceptionHandler
+                        setInterpretedMode
+                        setLegacyStrictMode
+                        slowEvalWarn
+                        toString
+                        tryQuickEval
+                        wait
+                    */
+                }
+
                 /**
                  * Represents the "com.glide.script.GlideElement" Java class.
                  * @export
@@ -4568,6 +4607,7 @@ declare namespace Packages {
                      * Java declaration: 'public class ScopedGlideFilter extends com.glide.script.fencing.ScopedScriptableObject'.
                      */
                     export interface ScopedGlideFilter extends ScopedScriptableObject {
+                        // Wraps com.glide.script.Filter?
                     }
 
                     /**
@@ -4589,6 +4629,7 @@ declare namespace Packages {
                      * Java declaration: 'public class ScopedGlideLocale extends com.glide.script.fencing.ScopedScriptableObject'.
                      */
                     export interface ScopedGlideLocale extends ScopedScriptableObject {
+                        // Wraps com.glide.sys.GlideLocale?
                     }
 
                     /**
@@ -4737,6 +4778,7 @@ declare namespace Packages {
                      * Java declaration: 'public class ScopedGlideTemplate extends com.glide.script.fencing.ScopedScriptableObject'.
                      */
                     export interface ScopedGlideTemplate extends ScopedScriptableObject {
+                        // Wraps com.glide.script.Template?
                     }
 
                     /**
@@ -5210,6 +5252,7 @@ declare namespace Packages {
                      * Java declaration: 'public class GlideSecurityUtils extends com.glide.script.fencing.ScopedScriptableObject'.
                      */
                     export interface GlideSecurityUtils extends script.fencing.ScopedScriptableObject {
+                        // Wraps com.glide.util.SecurityUtils?
                     }
 
                     /**
@@ -5325,6 +5368,7 @@ declare namespace Packages {
                  * Java declaration: 'public class ScopedStringUtil extends com.glide.script.fencing.ScopedScriptableObject'.
                  */
                 export interface ScopedStringUtil extends script.fencing.ScopedScriptableObject {
+                    // Wraps com.glide.util.StringUtil?
                 }
 
                 /**
@@ -5335,6 +5379,7 @@ declare namespace Packages {
                  * Java declaration: 'public class ScopedXMLUtil extends com.glide.script.fencing.ScopedScriptableObject'.
                  */
                 export interface ScopedXMLUtil extends script.fencing.ScopedScriptableObject {
+                    // Wraps com.glide.util.XMLUtil?
                 }
             }
 
@@ -5424,6 +5469,7 @@ declare namespace Packages {
                  * Java declaration: 'public final class ScopedGlideappCatalogItem implements com.glide.script.fencing.IScopedApi'.
                  */
                 export interface ScopedGlideappCatalogItem extends java.lang.Object {
+                    // Wraps com.glideapp.servicecatalog.CatalogItem?
                 }
 
                 export namespace scoped {

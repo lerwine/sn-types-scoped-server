@@ -16,7 +16,7 @@ declare type EncryptionAlgorithmSignType = "NONEwithRSA" | "MD2withRSA" | "MD5wi
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/sandiego/server/no-namespace/ActionAPIBoth}
  * @see {@link https://docs.servicenow.com/bundle/rome-application-development/page/app-store/dev_portal/API_reference/Action/concept/ActionAPIBoth.html}
  */
- declare class Action implements Packages.com.glide.script.fencing.ScopedAction {
+declare class Action implements Packages.com.glide.script.fencing.ScopedAction {
     /**
      * Gets a GlideURI object to determine the user view.
      * @return {GlideURI} GlideURI object representing the URI parameter of the user view.
@@ -88,7 +88,7 @@ declare type EncryptionAlgorithmSignType = "NONEwithRSA" | "MD2withRSA" | "MD5wi
  * @class CertificateEncryption
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/c_CertificateEncryptionScopedAPI}
  */
- declare class CertificateEncryption implements Packages.com.glide.sys.security.CertificateEncryption {
+declare class CertificateEncryption implements Packages.com.glide.sys.security.CertificateEncryption {
     constructor();
 
     /**
@@ -141,7 +141,7 @@ declare type EncryptionAlgorithmSignType = "NONEwithRSA" | "MD2withRSA" | "MD5wi
  * @class FlowScriptAPI
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/FlowScriptAPI}
  */
- declare class FlowScriptAPI {
+declare class FlowScriptAPI {
     private constructor();
     /**
      * Returns the context ID of the running flow.
@@ -4029,7 +4029,7 @@ declare class GlideElementCurrency2 implements Packages.com.glide.currency2.Glid
  * @todo Add members to GlideImportLog
  */
 declare class GlideImportLog {
-    // TODO: Find out what is the base class
+    // TODO: Is base class Packages.com.glide.db.impex.ImportLog?
 }
 
 /**
@@ -4039,7 +4039,7 @@ declare class GlideImportLog {
  * @todo Add members to GlideImportSetRun
  */
 declare class GlideImportSetRun {
-    // TODO: Find out what is the base class
+    // TODO: Is base class Packages.com.glide.system_import_set.ImportSetRun?
 }
 
 /**
@@ -4049,7 +4049,7 @@ declare class GlideImportSetRun {
  * @todo Add members to GlideImportSetTransformer
  */
 declare class GlideImportSetTransformer {
-    // TODO: Find out what is the base class
+    // TODO: Is base class com.glide.system_import_set.ImportSetTransformer?
 }
 
 /**
@@ -4059,7 +4059,7 @@ declare class GlideImportSetTransformer {
  * @todo Add members to GlideQuery
  */
 declare class GlideQuery {
-    // TODO: Find out what is the base class
+    // TODO: Is same as global.GlideQuery?
 }
 
 /**
@@ -4070,6 +4070,7 @@ declare class GlideQuery {
  */
 declare class NotifyConferenceUtil {
     // TODO: Find out what is the base class
+    // Could not find class
 }
 
 /**
@@ -4079,7 +4080,7 @@ declare class NotifyConferenceUtil {
  * @todo Add members to Optional
  */
 declare class Optional {
-    // TODO: Find out what is the base class
+    // TODO: Is same as global.Optional;
 }
 
 /**
@@ -4088,17 +4089,7 @@ declare class Optional {
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/RenderProperties-Scoped-API}
  * @todo Add members to RenderProperties
  */
-declare class RenderProperties {
-    // TODO: Find out what is the base class
-}
-
-/**
- * The ScopedDCManager API enables you to group data by type.
- * @class ScopedDCManager
- * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/DCManagerAPIScoped}
- * @todo Add members to ScopedDCManager
- */
-declare class ScopedDCManager implements Packages.com.glide.script.fencing.ScopedRenderProperties {
+declare class RenderProperties implements Packages.com.glide.script.fencing.ScopedRenderProperties {
     // TODO: Implement getEncodedQuery     from com.glide.script.fencing.ScopedRenderProperties under com.glide.script.fencing.ScopedRenderProperties
     // TODO: Implement getListControl      from com.glide.script.fencing.ScopedRenderProperties under com.glide.script.fencing.ScopedRenderProperties
     // TODO: Implement getParameterValue   from com.glide.script.fencing.ScopedRenderProperties under com.glide.script.fencing.ScopedRenderProperties
@@ -4112,6 +4103,15 @@ declare class ScopedDCManager implements Packages.com.glide.script.fencing.Scope
     equals(obj: any): $$rhino.Boolean;
     hashCode(): $$rhino.Number;
     toString(): $$rhino.String;
+}
+
+/**
+ * The ScopedDCManager API enables you to group data by type.
+ * @class ScopedDCManager
+ * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/DCManagerAPIScoped}
+ * @todo Add members to ScopedDCManager
+ */
+declare class ScopedDCManager {
     // TODO: Find out what is the base class
 }
 
@@ -4142,7 +4142,7 @@ declare class SPScriptedFacetService {
  * @todo Add members to Stream
  */
 declare class Stream {
-    // TODO: Find out what is the base class
+    // TODO: Is same as global.Stream?
 }
 
 /**
