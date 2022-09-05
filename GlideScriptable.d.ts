@@ -1,6 +1,11 @@
 /// <reference path="$$rhino.d.ts" />
 /// <reference path="Packages.d.ts" />
 
+/**
+ * @file Definitions for scriptable Java classes.
+ * @author Leonard T. Erwine
+ */
+
 declare type EncryptionAlgorithmHashType = "MD-2" | "MD-5" | "SHA-1" | "SHA-224" | "SHA-256" | "SHA-384" | "SHA-512";
 
 declare type EncryptionAlgorithmSignType = "NONEwithRSA" | "MD2withRSA" | "MD5withRSA" | "SHA1withRSA" | "SHA224withRSA" | "SHA256withRSA" | "SHA384withRSA" |
@@ -2881,16 +2886,108 @@ declare class GlideTableHierarchy implements Packages.com.glide.script.fencing.G
  * @todo Add members to GlideSysAttachment
  */
 declare class GlideSysAttachment implements Packages.com.glide.script.fencing.GlideSysAttachment {
-    // TODO: Implement static copy        from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement copy               from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement deleteAttachment   from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement getAttachments     from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement getContent         from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement getContentBase64   from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement getContentStream   from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement write              from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement writeBase64        from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
-    // TODO: Implement writeContentStream from com.glide.script.fencing.GlideSysAttachment under com.glide.script.fencing.GlideSysAttachment
+    /**
+     * Creates an instance of GlideSysAttachment.
+     * @memberof GlideSysAttachment
+     */
+    constructor();
+    
+    /**
+     * Copies attachments from the source record to the target record.
+     * @static
+     * @param {$$rhino.String} sourceTable - Name of the table with the attachments to be copied.
+     * @param {$$rhino.String} sourceID - Source table's sys_id.
+     * @param {$$rhino.String} targetTable - Name of the table on which to add the attachments.
+     * @param {$$rhino.String} targetID - Target table's sys_id.
+     * @return {Packages.java.util.ArrayList<$$rhino.String>} Array of sys_ids of the attachments that were copied.
+     * @memberof GlideSysAttachment
+     */
+    static copy(sourceTable: $$rhino.String, sourceID: $$rhino.String, targetTable: $$rhino.String, targetID: $$rhino.String): Packages.java.util.ArrayList<$$rhino.String>;
+    
+    /**
+     * Copies attachments from the source record to the target record.
+     * @param {$$rhino.String} sourceTable - Name of the table with the attachments to be copied.
+     * @param {$$rhino.String} sourceID - Source table's sys_id.
+     * @param {$$rhino.String} targetTable - Name of the table on which to add the attachments.
+     * @param {$$rhino.String} targetID - Target table's sys_id.
+     * @return {Packages.java.util.ArrayList<$$rhino.String>} Array of sys_ids of the attachments that were copied.
+     * @memberof GlideSysAttachment
+     */
+    copy(sourceTable: $$rhino.String, sourceID: $$rhino.String, targetTable: $$rhino.String, targetID: $$rhino.String): Packages.java.util.ArrayList<$$rhino.String>;
+
+    /**
+     * Deletes the specified attachment.
+     * @param {$$rhino.String} attachmentID - Attachment's sys_id.
+     * @memberof GlideSysAttachment
+     */
+    deleteAttachment(attachmentID: $$rhino.String): void;
+
+    /**
+     * Returns a GlideRecord containing the matching attachment metadata such as name, type, or size.
+     * @param {$$rhino.String} tableName - Name of the table to which the attachment belongs; for example, incident.
+     * @param {$$rhino.String} sys_id - The sys_id of record to which the attachment belongs.
+     * @return {GlideRecord} GlideRecord object containing the matching attachment metadata such as name, type, or size.
+     * @memberof GlideSysAttachment
+     */
+    getAttachments(tableName: $$rhino.String, sys_id: $$rhino.String): GlideRecord;
+
+    /**
+     * Returns the attachment content as a string.
+     * @param {GlideRecord} sysAttachment - Attachment record.
+     * @return {$$rhino.String} Attachment contents as a string. Returns up to 5MB of data.
+     * @memberof GlideSysAttachment
+     */
+    getContent(sysAttachment: GlideRecord): $$rhino.String;
+
+    /**
+     * Returns the attachment content as a string with base64 encoding.
+     * @param {GlideRecord} sysAttachment - Attachment record.
+     * @return {$$rhino.String} Attachment contents as a string with base64 encoding. Returns up to 5MB of data.
+     * @memberof GlideSysAttachment
+     */
+    getContentBase64(sysAttachment: GlideRecord): $$rhino.String;
+
+    /**
+     * Returns a GlideScriptableInputStream object given the sys_id of an attachment.
+     * @param {$$rhino.String} sysID - Attachment sys_id.
+     * @return {GlideScriptableInputStream} Stream that contains the attachment content.
+     * @memberof GlideSysAttachment
+     */
+    getContentStream(sysID: $$rhino.String): GlideScriptableInputStream;
+
+    /**
+     * Attaches a specified attachment to the specified record.
+     * @param {GlideRecord} record - Record to which to attach the attachment.
+     * @param {$$rhino.String} fileName - Attachment file name.
+     * @param {$$rhino.String} contentType - Attachment content type.
+     * @param {$$rhino.String} content - Attachment content.
+     * @return {$$rhino.String | null} Attachment sys_id or null if the attachment was not added.
+     * @memberof GlideSysAttachment
+     */
+    write(record: GlideRecord, fileName: $$rhino.String, contentType: $$rhino.String, content: $$rhino.String): $$rhino.String | null;
+
+    /**
+     * 
+     * @param {GlideRecord} now_GR - 
+     * @param {$$rhino.String} fileName - 
+     * @param {$$rhino.String} contentType - 
+     * @param {$$rhino.String} content_base64Encoded - 
+     * @return {$$rhino.String}
+     * @memberof GlideSysAttachment
+     */
+    writeBase64(now_GR: GlideRecord, fileName: $$rhino.String, contentType: $$rhino.String, content_base64Encoded: $$rhino.String): $$rhino.String;
+
+    /**
+     * 
+     * @param {GlideRecord} now_GR - 
+     * @param {$$rhino.String} fileName - 
+     * @param {$$rhino.String} contentType - 
+     * @param {GlideScriptableInputStream} inputStream - 
+     * @return {$$rhino.String}
+     * @memberof GlideSysAttachment
+     */
+    writeContentStream(now_GR: GlideRecord, fileName: $$rhino.String, contentType: $$rhino.String, inputStream: GlideScriptableInputStream): $$rhino.String;
+
     equals(obj: object): $$rhino.Boolean;
     hashCode(): $$rhino.Number;
     toString(): $$rhino.String;
@@ -3217,6 +3314,24 @@ declare class GlideSecureRandomUtil implements Packages.com.glide.sys.security.S
     toString(): $$rhino.String;
 }
 
+declare class GlideLRUCache	implements Packages.com.glide.sys.cache.LRUCache {
+    equals(obj: any): $$rhino.Boolean;
+    hashCode(): $$rhino.Number;
+    toString(): $$rhino.String;
+    clear(): void;
+    clone(): Packages.java.lang.Object;
+    containsKey(key: any): $$rhino.Boolean;
+    containsValue(value: any): $$rhino.Boolean;
+    entrySet(): Packages.java.util.Set<Packages.java.util.MapEntry<any, any>>;
+    get(key: any);
+    isEmpty(): $$rhino.Boolean;
+    keySet(): Packages.java.util.Set<any>;
+    put(key: any, value: any);
+    remove(key: any);
+    size(): $$rhino.Number;
+    values(): Packages.java.util.Collection<any>;
+}
+
 /**
  * The scoped GlideDigest class provides methods for creating a message digest from strings or input streams using MD5, SHA1, or SHA256 hash algorithms.
  * Library: glide-16.6.0.3.jar
@@ -3224,27 +3339,36 @@ declare class GlideSecureRandomUtil implements Packages.com.glide.sys.security.S
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/c_GlideDigestScopedAPI}
  */
 declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDigest {
-    // TODO: Implement sha1_digest                    from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getMD5Base64                   from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getMD5Base64FromInputStream    from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getMD5Hex                      from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getMD5HexFromInputStream       from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA1Base64                  from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA1Base64FromInputStream   from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA1Hex                     from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA1HexFromInputStream      from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA256Base64                from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA256Base64FromInputStream from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA256Hex                   from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement getSHA256HexFromInputStream    from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement md5_digest                     from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement sha1_digest                    from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
-    // TODO: Implement sha256_digest                  from com.glide.script.fencing.GlideDigest under com.glide.script.fencing.GlideDigest
     /**
      * Creates an instance of GlideDigest.
      * @memberof GlideDigest
      */
     constructor();
+
+    /**
+     * Create a message digest from a string using the MD5 algorithm. The output string is in Base64.
+     * @param {$$rhino.String} toHash - The source string.
+     * @return {$$rhino.String} The message digest.
+     * @memberof GlideDigest
+     */
+    md5_digest(toHash: $$rhino.String): $$rhino.String;
+
+    /**
+     * Create a message digest from a string using the SHA1 algorithm. The output string is in Base64.
+     * @param {$$rhino.String} toHash - The source string.
+     * @return {$$rhino.String} The message digest.
+     * @memberof GlideDigest
+     */
+    sha1_digest(toHash: $$rhino.String): $$rhino.String;
+
+    /**
+     * Create a message digest from a string using the SHA256 algorithm. The output string is in Base64.
+     * @param {$$rhino.String} toHash - The source string.
+     * @return {$$rhino.String} The message digest.
+     * @memberof GlideDigest
+     */
+    sha256_digest(toHash: $$rhino.String): $$rhino.String;
+    
     /**
      * Create a message digest from a string using the MD5 algorithm. The output string is in Base64.
      * @param {$$rhino.String} source - The source string.
@@ -3252,6 +3376,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getMD5Base64(source: $$rhino.String): $$rhino.String;
+
     /**
      * Create a message digest from an input stream using the MD5 algorithm. The output string is in Base64.
      * @param {GlideScriptableInputStream} inputStream - The source input stream.
@@ -3259,6 +3384,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getMD5Base64FromInputStream(inputStream: GlideScriptableInputStream): $$rhino.String;
+
     /**
      * Create a message digest from a string using the MD5 algorithm. The output string is in hexadecimal.
      * @param {$$rhino.String} source - The source string.
@@ -3266,6 +3392,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getMD5Hex(source: $$rhino.String): $$rhino.String;
+
     /**
      * Create a message digest from an input stream using the MD5 algorithm. The output string is in hexadecimal.
      * @param {GlideScriptableInputStream} inputStream - The source input stream.
@@ -3273,6 +3400,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getMD5HexFromInputStream(inputStream: GlideScriptableInputStream): $$rhino.String;
+
     /**
      * Create a message digest from a string using the SHA1 algorithm. The output string is in Base64.
      * @param {$$rhino.String} source - The source string.
@@ -3280,6 +3408,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA1Base64(source: $$rhino.String): $$rhino.String;
+
     /**
      * Create a message digest from an input stream using the SHA1 algorithm. The output string is in Base64.
      * @param {GlideScriptableInputStream} inputStream - The source input stream.
@@ -3287,6 +3416,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA1Base64FromInputStream(inputStream: GlideScriptableInputStream): $$rhino.String;
+
     /**
      * Create a message digest from a string using the SHA1 algorithm. The output string is in hexadecimal.
      * @param {$$rhino.String} source - The source string.
@@ -3294,6 +3424,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA1Hex(source: $$rhino.String): $$rhino.String;
+
     /**
      * Create a message digest from an input stream using the SHA1 algorithm. The output string is in hexadecimal.
      * @param {GlideScriptableInputStream} inputStream - The source input stream.
@@ -3301,6 +3432,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA1HexFromInputStream(inputStream: GlideScriptableInputStream): $$rhino.String;
+
     /**
      * Create a message digest from a string using the SHA256 algorithm. The output string is in Base64.
      * @param {$$rhino.String} source - The source string.
@@ -3308,6 +3440,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA256Base64(source: $$rhino.String): $$rhino.String;
+
     /**
      * Create a message digest from an input stream using the SHA256 algorithm. The output string is in Base64.
      * @param {GlideScriptableInputStream} inputStream - The source input stream.
@@ -3315,6 +3448,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA256Base64FromInputStream(inputStream: GlideScriptableInputStream): $$rhino.String;
+
     /**
      * Create a message digest from a string using the SHA256 algorithm. The output string is in hexadecimal.
      * @param {$$rhino.String} source - The source string.
@@ -3322,6 +3456,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA256Hex(source: $$rhino.String): $$rhino.String;
+
     /**
      * Create a message digest from an input stream using the SHA256 algorithm. The output string is in hexadecimal.
      * @param {GlideScriptableInputStream} inputStream - The source input stream.
@@ -3329,6 +3464,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     getSHA256HexFromInputStream(inputStream: GlideScriptableInputStream): $$rhino.String;
+
     equals(obj: object): $$rhino.Boolean;
     hashCode(): $$rhino.Number;
     toString(): $$rhino.String;
@@ -4017,6 +4153,15 @@ declare type AggregationInterval = "date" | "dayofweek" | "hour" | "minute" | "q
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/GlideElementCurrency2API}
  */
 declare class GlideElementCurrency2 implements Packages.com.glide.currency2.GlideElementCurrency2 {
+    compareTo(anotherDouble: $$rhino.Number): $$rhino.Number;
+    isInfinite(): $$rhino.Boolean;
+    isNaN(): $$rhino.Boolean;
+    byteValue(): Packages.java.lang.Byte;
+    doubleValue(): Packages.java.lang.Double;
+    floatValue(): Packages.java.lang.Float;
+    intValue(): Packages.java.lang.Integer;
+    longValue(): Packages.java.lang.Long;
+    shortValue(): Packages.java.lang.Short;
     equals(obj: any): $$rhino.Boolean;
     hashCode(): $$rhino.Number;
     toString(): $$rhino.String;
@@ -4053,16 +4198,6 @@ declare class GlideImportSetTransformer {
 }
 
 /**
- * The GlideQuery API is an alternative to GlideRecord to perform CRUD operations on record data from server-side scripts.
- * @class GlideQuery
- * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/GlideQueryAPI}
- * @todo Add members to GlideQuery
- */
-declare class GlideQuery {
-    // TODO: Is same as global.GlideQuery?
-}
-
-/**
  * The NotifyConferenceUtil API provides methods to manage Notify conference calls and SMS messages for various telephony service providers, such as Zoom and WebEx.
  * @class NotifyConferenceUtil
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/NotifyConferenceUtils}
@@ -4071,16 +4206,6 @@ declare class GlideQuery {
 declare class NotifyConferenceUtil {
     // TODO: Find out what is the base class
     // Could not find class
-}
-
-/**
- * The Optional API interacts with a single record returned by the GlideQuery, Stream, or GlideRecord APIs, even when it does not exist. Write scripts that are less likely to result in an error by handling null or undefined query results.
- * @class Optional
- * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/OptionalGlobalAPI}
- * @todo Add members to Optional
- */
-declare class Optional {
-    // TODO: Is same as global.Optional;
 }
 
 /**
@@ -4133,16 +4258,6 @@ declare class SPScriptedFacet {
  */
 declare class SPScriptedFacetService {
     // TODO: Find out what is the base class
-}
-
-/**
- * The Stream API interacts with a stream of items such as records. For example, you can use the forEach() method to update the state of each record in a stream returned by the GlideQuery API.
- * @class Stream
- * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/StreamGlobalAPI}
- * @todo Add members to Stream
- */
-declare class Stream {
-    // TODO: Is same as global.Stream?
 }
 
 /**
