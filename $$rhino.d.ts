@@ -30,7 +30,11 @@ declare namespace $$rhino {
      */
     export type StringLike = String | Packages.java.lang.CharSequence | Packages.java.lang.Character;
 
-    export type StringOf<N extends string> = N | Packages.java.lang.String;
+    /**
+     * Utility type for a javascript string or a Java string-like types.
+     * @typedef {(N | (Packages.java.lang.String & { toString(): N }))} StringLike
+     */
+    export type StringOf<N extends string> = N | (Packages.java.lang.String & { toString(): N });
 
     /**
      * Utility type for javascript primitive string values and Java string-like objects that are empty.
@@ -40,7 +44,7 @@ declare namespace $$rhino {
 
     /**
      * Utility type to include empty string values.
-     * @typedef {(S | "")} IncludeEmptyString
+     * @typedef {(S | EmptyString)} IncludeEmptyString
      * @template S - Type of value that is to include empty string values.
      */
     export type IncludeEmptyString<S> = S | EmptyString;
