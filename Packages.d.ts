@@ -3837,20 +3837,24 @@ declare namespace Packages {
 
             export namespace currency {
                 /**
-                 * Represents the "com.glide.currency.GlideElementCurrency" Java class.
+                 * Represents the "Currency" element type ("com.glide.currency.GlideElementCurrency" Java class).
                  * @export
                  * @Interface GlideElementCurrency
-                 * @description Library: glide-16.6.0.3.jar;
+                 * @description Internal type: 'currency';
+                 * scalar_type: 'decimal'; scalar_length: 20;
+                 * Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideElementCurrency extends com.glide.script.GlideElement implements com.glide.currency.ICurrencyConstants, com.glide.script.ICustomAudit'.
                  */
-                export interface GlideElementCurrency extends script.GlideElement {
+                export interface GlideElementCurrency extends script.GlideElement, java.lang.Double {
                 }
 
                 /**
-                 * Represents the "com.glide.currency.GlideElementPrice" Java class.
+                 * Represents the "Price" element type ("com.glide.currency.GlideElementPrice" Java class).
                  * @export
                  * @Interface GlideElementPrice
-                 * @description Library: glide-16.6.0.3.jar;
+                 * @description Internal type: 'price';
+                 * scalar_type: 'decimal'; scalar_length: 20;
+                 * Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideElementPrice extends GlideElementCurrency'.
                  */
                 export interface GlideElementPrice extends GlideElementCurrency {
@@ -3859,10 +3863,12 @@ declare namespace Packages {
 
             export namespace currency2 {
                 /**
-                 * Represents the "com.glide.currency2.GlideElementCurrency2" Java class.
+                 * Represents the "FX Currency" element type ("com.glide.currency2.GlideElementCurrency2" Java class).
                  * @export
                  * @interface GlideElementCurrency2
-                 * @description Library: glide-16.6.0.3.jar;
+                 * @description Internal type: 'currency2';
+                 * scalar_type: 'GUID'; scalar_length: 32;
+                 * Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideElementCurrency2 extends com.glide.script.glide_elements.GlideElementReference implements com.glide.script.IGlideElementMultipleValueContainer, com.glide.script.ICustomAudit, com.glide.audit.ICustomHistoryFormatter'.
                  */
                 export interface GlideElementCurrency2 extends script.glide_elements.GlideElementReference, currency.GlideElementCurrency { }
@@ -3970,6 +3976,19 @@ declare namespace Packages {
                 }
             }
 
+            export namespace db_audio {
+                /**
+                 * Represents the "Audio" element type ("com.glide.db_audio.GlideElementAudio" Java class).
+                 * @export
+                 * @interface GlideElementAudio
+                 * @description Internal type: 'audio';
+                 * scalar_type: 'string';
+                 * Library: glide-apps-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementAudio extends script.glide_elements.GlideElementViewable'.
+                 */
+                export interface GlideElementAudio extends script.glide_elements.GlideElementViewable { }
+            }
+
             export namespace element_mapping {
                 /**
                  * Represents the "com.glide.element_mapping.MappingLookupSourceDescriptor" Java class.
@@ -4052,6 +4071,21 @@ declare namespace Packages {
                 }
             }
 
+            export namespace graphql {
+                export namespace element {
+                    /**
+                     * Represents the "GraphQL Schema" element type ("com.glide.graphql.element.GlideElementGraphQLSchema" Java class).
+                     * @export
+                     * @interface GlideElementGraphQLSchema
+                     * @description Internal type: 'graphql_schema';
+                     * scalar_type: 'string'; scalar_length: 4000;
+                     * Library: graphql-java-8.0.0-snc-9.jar;
+                     * Java declaration: 'public static class GlideElementGraphQLSchema extends graphql.schema.GraphQLSchema'.
+                     */
+                    export interface GlideElementGraphQLSchema { }
+                }
+            }
+
             export namespace glideobject {
                 /**
                  * Represents the "com.glide.glideobject.AGlideObject" Java class.
@@ -4060,8 +4094,312 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public abstract class AGlideObject implements com.glide.glideobject.IGlideObject'.
                  */
-                export interface AGlideObject extends java.lang.Object {
-                }
+                export interface AGlideObject extends java.lang.Object { }
+
+                /**
+                 * Represents the "com.glide.glideobject.CalXofY" Java class.
+                 * @export
+                 * @Interface CalXofY
+                 * @description Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public abstract class CalXofY extends AGlideObject implements com.glide.util.IConstants'.
+                 */
+                export interface CalXofY extends AGlideObject { }
+
+                /**
+                 * Represents the "Calendar Date/Time" element ("com.glide.glideobject.CalendarDateTime" Java class).
+                 * @export
+                 * @Interface CalendarDateTime
+                 * @description Internal type: 'calendar_date_time';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class CalendarDateTime extends GlideDateTime implements com.glide.script.fencing.IScopedApi'.
+                 */
+                export interface CalendarDateTime extends GlideDateTime { }
+
+                /**
+                 * Represents the "Other Date" element ("com.glide.glideobject.GlideDate" Java class).
+                 * @export
+                 * @Interface GlideDate
+                 * @description Internal type: 'date';
+                 * scalar_type: 'date';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideDate extends GlideDateTime'.
+                 */
+                export interface GlideDate extends GlideDateTime { }
+
+                /**
+                 * Represents the "Day of Week" element ("com.glide.glideobject.DayOfWeek" Java class).
+                 * @export
+                 * @Interface DayOfWeek
+                 * @description Internal type: 'day_of_week';
+                 * scalar_type: 'integer';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class DayOfWeek extends CalXofY'.
+                 */
+                export interface DayOfWeek extends CalXofY { }
+
+                /**
+                 * Represents the "Due Date" element ("com.glide.glideobject.GlideDueDate" Java class).
+                 * @export
+                 * @Interface GlideDueDate
+                 * @description Internal type: 'due_date';
+                 * scalar_type: 'datetime';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideDueDate extends GlideDateTime'.
+                 */
+                export interface GlideDueDate extends GlideDateTime { }
+
+                /**
+                 * Represents the "UI Action List" element ("com.glide.glideobject.GlideActionList" Java class).
+                 * @export
+                 * @Interface GlideActionList
+                 * @description Internal type: 'glide_action_list';
+                 * scalar_type: 'string'; scalar_type: 1024;
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideActionList extends GlideList'.
+                 */
+                export interface GlideActionList extends GlideList { }
+
+                /**
+                 * Represents the "UI Action List" element ("com.glide.glideobject.GlideDate" Java class).
+                 * @export
+                 * @Interface Date
+                 * @description Internal type: 'glide_date';
+                 * scalar_type: 'date';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideDate extends GlideDateTime'.
+                 */
+                export interface Date extends GlideDateTime { }
+
+                /**
+                 * Represents the "Date/Time" element ("com.glide.glideobject.GlideDateTime" Java class).
+                 * @export
+                 * @Interface GlideDateTime
+                 * @description Internal type: 'glide_date_time';
+                 * scalar_type: 'datetime';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideDateTime extends AGlideObject implements com.glide.util.IConstants, com.glide.util.IDateConstants, com.glide.util.IProperties, IXMLTranslator, Comparable, com.snc.process_flow.val.IPFDateTime'.
+                 */
+                export interface GlideDateTime extends AGlideObject { }
+
+                /**
+                 * Represents the "Duration" element ("com.glide.glideobject.GlideDuration" Java class).
+                 * @export
+                 * @Interface GlideDuration
+                 * @description Internal type: 'glide_duration';
+                 * scalar_type: 'datetime';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideDuration extends GlideTime'.
+                 */
+                export interface GlideDuration extends GlideTime { }
+
+                /**
+                 * Represents the "List" element ("com.glide.glideobject.GlideList" Java class).
+                 * @export
+                 * @Interface GlideList
+                 * @description Internal type: 'glide_list';
+                 * scalar_type: 'string'; scalar_type: 1024;
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideList extends GlideObject implements com.glide.util.IConstants, IManyToManyConstants'.
+                 */
+                export interface GlideList extends AGlideObject { }
+
+                /**
+                 * Represents the "Precise Time" element ("com.glide.glideobject.GlidePreciseTime" Java class).
+                 * @export
+                 * @Interface GlidePreciseTime
+                 * @description Internal type: 'glide_precise_time';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlidePreciseTime extends GlideDateTime'.
+                 */
+                export interface GlidePreciseTime extends GlideDateTime { }
+
+                /**
+                 * Represents the "Time" element ("com.glide.glideobject.GlideTime" Java class).
+                 * @export
+                 * @Interface GlideTime
+                 * @description Internal type: 'glide_time';
+                 * scalar_type: 'datetime';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideTime extends GlideDateTime'.
+                 */
+                 export interface GlideTime extends GlideDateTime { }
+
+                /**
+                 * Represents the "Time" element ("com.glide.glideobject.GlideUTCTime" Java class).
+                 * @export
+                 * @Interface GlideUTCTime
+                 * @description Internal type: 'glide_utc_time';
+                 * scalar_type: 'datetime';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideUTCTime extends GlideTime'.
+                 */
+                 export interface GlideUTCTime extends GlideTime { }
+
+                /**
+                 * Represents the "HTML" element ("com.glide.glideobject.GlideHTML" Java class).
+                 * @export
+                 * @Interface GlideHTML
+                 * @description Internal type: 'html';
+                 * scalar_type: 'string'; scalar_type: 65536;
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideHTML extends GlideObject implements ISecurityConstants'.
+                 */
+                export interface GlideHTML extends AGlideObject { }
+
+                /**
+                 * Represents the "Integer Date" element ("com.glide.glideobject.IntegerDate" Java class).
+                 * @export
+                 * @Interface IntegerDate
+                 * @description Internal type: 'integer_date';
+                 * scalar_type: 'integer';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class IntegerDate extends AGlideObject implements com.glide.util.IDateConstants, com.glide.util.IProperties, Comparable, IXMLTranslator'.
+                 */
+                export interface IntegerDate extends AGlideObject { }
+
+                /**
+                 * Represents the "Integer Time" element ("com.glide.glideobject.IntegerTime" Java class).
+                 * @export
+                 * @Interface IntegerTime
+                 * @description Internal type: 'integer_time';
+                 * scalar_type: 'integer';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class IntegerTime extends AGlideObject implements com.glide.util.IProperties, Comparable, IXMLTranslator'.
+                 */
+                export interface IntegerTime extends AGlideObject { }
+
+                /**
+                 * Represents the "Journal" element ("com.glide.glideobject.Journal" Java class).
+                 * @export
+                 * @Interface Journal
+                 * @description Internal type: 'journal';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public final class Journal extends GlideObject implements IJournalConstants'.
+                 */
+                export interface Journal extends AGlideObject { }
+
+                /**
+                 * Represents the "Journal Input" element ("com.glide.glideobject.Journal" Java class).
+                 * @export
+                 * @Interface Journal
+                 * @description Internal type: 'journal_input';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public final class Journal extends GlideObject implements IJournalConstants'.
+                 */
+                export interface Journal extends AGlideObject { }
+
+                /**
+                 * Represents the "Journal List" element ("com.glide.glideobject.Journal" Java class).
+                 * @export
+                 * @Interface Journal
+                 * @description Internal type: 'journal_list';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public final class Journal extends GlideObject implements IJournalConstants'.
+                 */
+                export interface Journal extends AGlideObject { }
+
+                /**
+                 * Represents the "Mask Code" element ("com.glide.glideobject.MaskCode" Java class).
+                 * @export
+                 * @Interface MaskCode
+                 * @description Internal type: 'mask_code';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class MaskCode extends AGlideObject implements com.glide.util.IConstants'.
+                 */
+                export interface MaskCode extends AGlideObject { }
+
+                /**
+                 * Represents the "Month of Year" element ("com.glide.glideobject.MonthOfYear" Java class).
+                 * @export
+                 * @Interface MonthOfYear
+                 * @description Internal type: 'month_of_year';
+                 * scalar_type: 'integer';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class MonthOfYear extends CalXofY'.
+                 */
+                export interface MonthOfYear extends CalXofY { }
+
+                /**
+                 * Represents the "Schedule Date/Time" element ("com.glide.glideobject.ScheduleDateTime" Java class).
+                 * @export
+                 * @Interface ScheduleDateTime
+                 * @description Internal type: 'schedule_date_time';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class ScheduleDateTime extends AGlideObject implements com.glide.util.IDateConstants, com.glide.util.IProperties, Comparable, IXMLTranslator'.
+                 */
+                export interface ScheduleDateTime extends AGlideObject { }
+
+                /**
+                 * Represents the "Timer" element ("com.glide.glideobject.GlideDuration" Java class).
+                 * @export
+                 * @Interface GlideDuration
+                 * @description Internal type: 'timer';
+                 * scalar_type: 'datetime';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideDuration extends GlideTime'.
+                 */
+                export interface GlideDuration extends GlideTime { }
+
+                /**
+                 * Represents the "Translated" element ("com.glide.glideobject.Translated" Java class).
+                 * @export
+                 * @Interface Translated
+                 * @description Internal type: 'translated';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class Translated extends GlideObject implements com.glide.util.IConstants, com.glide.util.IProperties'.
+                 */
+                export interface Translated extends AGlideObject { }
+
+                /**
+                 * Represents the "User Input" element ("com.glide.glideobject.GlideUserInput" Java class).
+                 * @export
+                 * @Interface GlideUserInput
+                 * @description Internal type: 'user_input';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideUserInput extends GlideObject implements com.glide.util.IQueryConstants'.
+                 */
+                export interface GlideUserInput extends AGlideObject { }
+
+                /**
+                 * Represents the "Week of Month" element ("com.glide.glideobject.WeekOfMonth" Java class).
+                 * @export
+                 * @Interface WeekOfMonth
+                 * @description Internal type: 'week_of_month';
+                 * scalar_type: 'integer';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class WeekOfMonth extends CalXofY'.
+                 */
+                export interface WeekOfMonth extends CalXofY { }
+
+                /**
+                 * Represents the "WMS Job" element ("com.glide.glideobject.GlideObject" Java class).
+                 * @export
+                 * @Interface GlideObject
+                 * @description Internal type: 'wms_job';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideObject extends AGlideObject'.
+                 */
+                export interface GlideObject extends AGlideObject { }
+
+                /**
+                 * Represents the "com.glide.glideobject.StringBoolean" Java class.
+                 * @export
+                 * @Interface StringBoolean
+                 * @description Internal type: 'string_boolean';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class StringBoolean extends AGlideObject implements com.glide.util.IConstants'.
+                 */
+                export interface StringBoolean extends AGlideObject { }
 
                 /**
                  * Represents the "com.glide.glideobject.CalendarDateTime" Java class.
@@ -4070,8 +4408,7 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class CalendarDateTime extends com.glide.glideobject.GlideDateTime implements com.glide.script.fencing.IScopedApi'.
                  */
-                export interface CalendarDateTime extends GlideDateTime {
-                }
+                export interface CalendarDateTime extends GlideDateTime { }
 
                 /**
                  * Represents the "com.glide.glideobject.GlideDate" Java class.
@@ -4080,8 +4417,7 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideDate extends com.glide.glideobject.GlideDateTime'.
                  */
-                export interface GlideDate extends GlideDateTime {
-                }
+                export interface GlideDate extends GlideDateTime { }
 
                 /**
                  * Represents the "com.glide.glideobject.GlideDateTime" Java class.
@@ -4090,8 +4426,7 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideDateTime extends com.glide.glideobject.AGlideObject implements com.glide.util.IConstants, com.glide.util.IDateConstants, com.glide.utilIProperties, com.glide.glideobject.IXMLTranslator, java.lang.Comparable, com.snc.process_flow.val.IPFDateTime'.
                  */
-                export interface GlideDateTime extends AGlideObject {
-                }
+                export interface GlideDateTime extends AGlideObject { }
 
                 /**
                  * Represents the "com.glide.glideobject.GlideDuration" Java class.
@@ -4100,8 +4435,7 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideDuration extends com.glide.glideobject.GlideTime'.
                  */
-                export interface GlideDuration extends GlideTime {
-                }
+                export interface GlideDuration extends GlideTime { }
 
                 /**
                  * Represents the "com.glide.glideobject.GlideTime" Java class.
@@ -4110,8 +4444,7 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideTime extends com.glide.glideobject.GlideDateTime'.
                  */
-                export interface GlideTime extends GlideDateTime {
-                }
+                export interface GlideTime extends GlideDateTime { }
 
                 /**
                  * Represents the "com.glide.glideobject.ScheduleDateTime" Java class.
@@ -4120,8 +4453,54 @@ declare namespace Packages {
                  * @description Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class ScheduleDateTime extends com.glide.glideobject.AGlideObject implements com.glide.util.IDateConstants, com.glide.utilIProperties, java.lang.Comparable, com.glide.glideobject.IXMLTranslator'.
                  */
-                export interface ScheduleDateTime extends AGlideObject {
+                export interface ScheduleDateTime extends AGlideObject { }
+
+                /**
+                 * Represents the "Name/Values" element type ("com.glide.glideobject.GlideElementNameValue" Java class).
+                 * @export
+                 * @interface GlideElementNameValue
+                 * @description Internal type: 'name_values';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementNameValue extends com.glide.script.GlideElement'.
+                 */
+                export interface GlideElementNameValue extends script.GlideElement { }
+            }
+
+            export namespace kmf {
+                export interface KMFCryptoModule extends script.fencing.ScopedScriptableObject {
+                    wrapKeyFromBytes(base64KeyBytes: $$rhino.String): $$rhino.String;
+                    wrapKeyFromBytesForAlgorithm(base64KeyBytes: $$rhino.String, algorithm: $$rhino.String): $$rhino.String;
+                    unwrapKey(formattedWrappedKey: $$rhino.String): $$rhino.String;
+                    unwrapKeyForAlgorithm(formattedWrappedKey: $$rhino.String, algorithm: $$rhino.String): $$rhino.String;
+                    wrapKeyFromSysId(keySysId: $$rhino.String): $$rhino.String;
+                    decryptData(data: $$rhino.String): $$rhino.String;
+                    generateMac(data: $$rhino.String): $$rhino.String;
+                    verifyMac(data: $$rhino.String, expectedMac: $$rhino.String): $$rhino.Boolean;
+                    asymmetricEncryptData(data: $$rhino.String): $$rhino.String;
+                    asymmetricDecryptData(data: $$rhino.String): $$rhino.String;
+                    asymmetricWrapKeyFromBytes(base64KeyBytes: $$rhino.String): $$rhino.String;
+                    asymmetricWrapKeyFromBytesForAlgorithm(base64KeyBytes: $$rhino.String, algo: $$rhino.String): $$rhino.String;
+                    asymmetricWrapKeyFromSysId(data: $$rhino.String): $$rhino.String;
+                    asymmetricUnwrapKey(data: $$rhino.String): $$rhino.String;
+                    asymmetricUnwrapKeyForAlgorithm(base64KeyBytes: $$rhino.String, algo: $$rhino.String): $$rhino.String;
+                    sign(data: $$rhino.String): $$rhino.String;
+                    verifySignature(signature: $$rhino.String, data: $$rhino.String): $$rhino.Boolean;
+                    discard(): void;
                 }
+            }
+
+            export namespace labels {
+                /**
+                 * Represents the "Related Tags" element type ("com.glide.labels.GlideElementRelatedTags" Java class).
+                 * @export
+                 * @interface GlideElementRelatedTags
+                 * @description Internal type: 'related_tags';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementRelatedTags extends com.glide.script.GlideElement'.
+                 */
+                export interface GlideElementRelatedTags extends script.GlideElement { }
             }
 
             export namespace metadata {
@@ -4187,13 +4566,15 @@ declare namespace Packages {
 
             export namespace PhoneNumber {
                 /**
-                 * Represents the "com.glide.PhoneNumber.GlideElementPhoneNumber" Java class.
+                 * Represents the "Phone Number (E164)" element type ("com.glide.PhoneNumber.GlideElementPhoneNumber" Java class).
                  * @export
                  * @Interface GlideElementPhoneNumber
-                 * @description Library: glide-16.6.0.3.jar;
+                 * @description Internal type: 'phone_number_e164';
+                 * scalar_type: 'string';
+                 * Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideElementPhoneNumber extends com.glide.script.GlideElement'.
                  */
-                export interface GlideElementPhoneNumber extends script.GlideElement {
+                export interface GlideElementPhoneNumber extends script.GlideElement, java.lang.String {
                 }
             }
 
@@ -5070,34 +5451,449 @@ declare namespace Packages {
 
                 export namespace glide_elements {
                     /**
-                     * Represents the "com.glide.script.glide_elements.GlideElementBoolean" Java class.
+                     * "Action Conditions" element type ("com.glide.script.glide_elements.GlideElementActionConditions" Java class).
+                     * @export
+                     * @interface GlideElementActionConditions
+                     * @extends {GlideElementConditions}
+                     * @description Internal type: 'action_conditions';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementConditions extends GlideElement implements IQueryConstants'.
+                     */
+                    export interface GlideElementActionConditions extends GlideElementConditions { }
+
+                    /**
+                     * Represents the "True/False" element type ("com.glide.script.glide_elements.GlideElementBoolean" Java class).
                      * @export
                      * @Interface GlideElementBoolean
-                     * @description Library: glide-16.6.0.3.jar;
+                     * @description Internal type: 'boolean';
+                     * scalar_type: 'boolean';
+                     * Library: glide-16.6.0.3.jar;
                      * Java declaration: 'public class GlideElementBoolean extends com.glide.script.GlideElement'.
                      */
-                    export interface GlideElementBoolean extends GlideElement {
-                    }
+                    export interface GlideElementBoolean extends GlideElement, java.lang.Boolean { }
+
+                    /**
+                     * Represents the "Compressed" element type ("com.glide.script.glide_elements.GlideElementCompressed" Java class).
+                     * @export
+                     * @Interface GlideElementCompressed
+                     * @description Internal type: 'compressed';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementCompressed extends GlideElement'.
+                     */
+                    export interface GlideElementCompressed extends GlideElement, java.lang.String { }
+
+                    /**
+                     * Represents the "Conditions" element type ("com.glide.script.glide_elements.GlideElementConditions" Java class).
+                     * @export
+                     * @interface GlideElementConditions
+                     * @extends {GlideElement}
+                     * @description Internal type: 'conditions';
+                     * scalar_type: 'string'; scalar_length: 4000;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementConditions extends GlideElement implements IQueryConstants'.
+                     */
+                     export interface GlideElementConditions extends GlideElement { }
+                    
+                    /**
+                     * Represents the "Counter" element type ("com.glide.script.glide_elements.GlideElementCounter" Java class).
+                     * @export
+                     * @Interface GlideElementCounter
+                     * @description Internal type: 'counter';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementCounter extends GlideElement'.
+                     */
+                    export interface GlideElementCounter extends GlideElement { }
+
+                    /**
+                     * Represents the "Document ID" element type ("com.glide.script.glide_elements.GlideElementDocumentId" Java class).
+                     * @export
+                     * @Interface GlideElementDocumentId
+                     * @description Internal type: 'document_id';
+                     * scalar_type: 'GUID'; scalar_length: 32;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementDocumentId extends GlideElementReference'.
+                     */
+                    export interface GlideElementDocumentId extends GlideElementReference { }
+
+                    /**
+                     * Represents the "Documentation Field" element type ("com.glide.script.glide_elements.GlideElementDocumentation" Java class).
+                     * @export
+                     * @Interface GlideElementDocumentation
+                     * @description Internal type: 'documentation_field';
+                     * scalar_type: 'string'; scalar_length: 80;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementDocumentation extends GlideElement implements com.glide.util.IConstants, IGlideElementPreTranslatable'.
+                     */
+                    export interface GlideElementDocumentation extends GlideElement { }
+
+                    /**
+                     * Represents the "Domain ID" element type ("com.glide.script.glide_elements.GlideElementDomainId" Java class).
+                     * @export
+                     * @Interface GlideElementDomainId
+                     * @description Internal type: 'domain_id';
+                     * scalar_type: 'GUID'; scalar_length: 32;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementDomainId extends GlideElementReference'.
+                     */
+                    export interface GlideElementDomainId extends GlideElementReference { }
+
+                    /**
+                     * Represents the "Encrypted Text" element type ("com.glide.script.glide_elements.GlideElementEncrypted" Java class).
+                     * @export
+                     * @Interface GlideElementEncrypted
+                     * @description Internal type: 'glide_encrypted';
+                     * scalar_type: 'string'; scalar_length: 65536;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementEncrypted extends GlideElement'.
+                     */
+                    export interface GlideElementEncrypted extends GlideElement, java.lang.String { }
+
+                    /**
+                     * Represents the "File Attachment" element type ("com.glide.script.glide_elements.GlideElementFileAttachment" Java class).
+                     * @export
+                     * @Interface GlideElementFileAttachment
+                     * @description Internal type: 'file_attachment';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementFileAttachment extends GlideElementViewable'.
+                     */
+                    export interface GlideElementFileAttachment extends GlideElementViewable { }
+
+                    /**
+                     * Represents the "String (Full UTF-8)" element type ("com.glide.script.glide_elements.GlideElementFullUTF8" Java class).
+                     * @export
+                     * @Interface GlideElementFullUTF8
+                     * @description Internal type: 'string_full_utf8';
+                     * scalar_type: 'string'; scalar_length: 255;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementFullUTF8 extends GlideElement'.
+                     */
+                    export interface GlideElementFullUTF8 extends GlideElement, java.lang.String { }
 
                     /**
                      * Represents the "com.glide.script.glide_elements.GlideElementGlideObject" Java class.
                      * @export
                      * @Interface GlideElementGlideObject
                      * @description Library: glide-16.6.0.3.jar;
-                     * Java declaration: 'public class GlideElementGlideObject extends com.glide.script.GlideElement implements com.glide.script.glide_elements.IGlideElementGlideObject'.
+                     * Java declaration: 'public class GlideElementGlideObject extends GlideElement implements IGlideElementGlideObject'.
                      */
-                    export interface GlideElementGlideObject extends GlideElement {
-                    }
+                    export interface GlideElementGlideObject extends GlideElement { }
 
                     /**
-                     * Represents the "com.glide.script.glide_elements.GlideElementReference" Java class.
+                     * Represents the "IP Address (Validated IPV4, IPV6)" element type ("com.glide.script.glide_elements.GlideElementIPAddress" Java class).
+                     * @export
+                     * @Interface GlideElementIPAddress
+                     * @description Internal type: 'ip_addr';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementIPAddress extends GlideElement'.
+                     */
+                    export interface GlideElementIPAddress extends GlideElement { }
+
+                    /**
+                     * Represents the "Icon" element type ("com.glide.script.glide_elements.GlideElementIcon" Java class).
+                     * @export
+                     * @Interface GlideElementIcon
+                     * @description Internal type: 'icon';
+                     * scalar_type: 'string'; scalar_length: 100;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementIcon extends GlideElement'.
+                     */
+                    export interface GlideElementIcon extends GlideElement { }
+
+                    /**
+                     * Represents the "Internal Type" element type ("com.glide.script.glide_elements.GlideElementInternalType" Java class).
+                     * @export
+                     * @Interface GlideElementInternalType
+                     * @description Internal type: 'internal_type';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementInternalType extends GlideElement'.
+                     */
+                    export interface GlideElementInternalType extends GlideElement { }
+
+                    /**
+                     * Represents the "Integer" element type ("com.glide.script.glide_elements.GlideElementNumeric" Java class).
+                     * @export
+                     * @Interface GlideElementNumeric
+                     * @description Internal type: 'integer';
+                     * scalar_type: 'integer';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementNumeric extends GlideElement'.
+                     */
+                    export interface GlideElementNumeric extends GlideElement, java.lang.Integer { }
+
+                    /**
+                     * Represents the "com.glide.script.glide_elements.GlideElementObject" Java class.
+                     * @export
+                     * @Interface GlideElementObject
+                     * @description Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementObject extends GlideElement'.
+                     */
+                    export interface GlideElementObject extends GlideElement { }
+
+                    /**
+                     * Represents the "Password (1 Way Encrypted)" element type ("com.glide.script.glide_elements.GlideElementPassword" Java class).
+                     * @export
+                     * @Interface GlideElementPassword
+                     * @description Internal type: 'password';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementPassword extends GlideElement'.
+                     */
+                    export interface GlideElementPassword extends GlideElement, java.lang.String { }
+
+                    /**
+                     * Represents the "Password (2 Way Encrypted)" element type ("com.glide.script.glide_elements.GlideElementPassword2" Java class).
+                     * @export
+                     * @Interface GlideElementPassword2
+                     * @description Internal type: 'password2';
+                     * scalar_type: 'string'; scalar_length: 255;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementPassword2 extends GlideElement implements IDecryptable'.
+                     */
+                    export interface GlideElementPassword2 extends GlideElement, java.lang.String { }
+
+                    /**
+                     * Represents the "Reference" element type ("com.glide.script.glide_elements.GlideElementReference" Java class).
                      * @export
                      * @Interface GlideElementReference
-                     * @description Library: glide-16.6.0.3.jar;
-                     * Java declaration: 'public class GlideElementReference extends com.glide.script.GlideElement implements com.glide.script.IGlideRecordConstants, com.glide.script.glide_elements.IGlideElementPreOptimizable'.
+                     * @description Internal type: 'reference';
+                     * scalar_type: 'GUID';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementReference extends GlideElement implements IGlideRecordConstants, IGlideElementPreOptimizable'.
                      */
-                    export interface GlideElementReference extends GlideElement {
-                    }
+                    export interface GlideElementReference extends GlideElement { }
+
+                    /**
+                     * Represents the "Replication Payload" element type ("com.glide.script.glide_elements.GlideElementReplicationPayload" Java class).
+                     * @export
+                     * @Interface GlideElementReplicationPayload
+                     * @description Internal type: 'replication_payload';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementReplicationPayload extends GlideElement'.
+                     */
+                    export interface GlideElementReplicationPayload extends GlideElement { }
+
+                    /**
+                     * Represents the "Script (Plain)" element type ("com.glide.script.glide_elements.GlideElementScript" Java class).
+                     * @export
+                     * @Interface GlideElementScript
+                     * @description Internal type: 'script_plain';
+                     * scalar_type: 'string'; scalar_length: 4000;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementScript extends GlideElement'.
+                     */
+                    export interface GlideElementScript extends GlideElement { }
+
+                    /**
+                     * Represents the "com.glide.script.glide_elements.GlideElementShortElementName" Java class.
+                     * @export
+                     * @Interface GlideElementShortElementName
+                     * @description Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public abstract class GlideElementShortElementName extends GlideElement'.
+                     */
+                    export interface GlideElementShortElementName extends GlideElement { }
+
+                    /**
+                     * Represents the "Short Field Name" element type ("com.glide.script.glide_elements.GlideElementShortFieldName" Java class).
+                     * @export
+                     * @Interface GlideElementShortFieldName
+                     * @description Internal type: 'short_field_name';
+                     * scalar_type: 'string'; scalar_length: 40;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementShortFieldName extends GlideElementShortElementName'.
+                     */
+                    export interface GlideElementShortFieldName extends GlideElementShortElementName { }
+
+                    /**
+                     * Represents the "Short Table Name" element type ("com.glide.script.glide_elements.GlideElementShortTableName" Java class).
+                     * @export
+                     * @Interface GlideElementShortTableName
+                     * @description Internal type: 'short_table_name';
+                     * scalar_type: 'string'; scalar_length: 40;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementShortTableName extends GlideElementShortElementName'.
+                     */
+                    export interface GlideElementShortTableName extends GlideElementShortElementName { }
+
+                    /**
+                     * Represents the "Name-Value Pairs" element type ("com.glide.script.glide_elements.GlideElementSimpleNameValue" Java class).
+                     * @export
+                     * @Interface GlideElementSimpleNameValue
+                     * @description Internal type: 'simple_name_values';
+                     * scalar_type: 'string'; scalar_length: 4000;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementSimpleNameValue extends GlideElement'.
+                     */
+                    export interface GlideElementSimpleNameValue extends GlideElement { }
+
+                    /**
+                     * Represents the "Snapshot Template Value" element type ("com.glide.script.glide_elements.GlideElementSnapshotTemplateValue" Java class).
+                     * @export
+                     * @Interface GlideElementSnapshotTemplateValue
+                     * @description Internal type: 'snapshot_template_value';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementSnapshotTemplateValue extends GlideElementConditions'.
+                     */
+                    export interface GlideElementSnapshotTemplateValue extends GlideElementConditions { }
+
+                    /**
+                     * Represents the "Source ID" element type ("com.glide.script.glide_elements.GlideElementSourceId" Java class).
+                     * @export
+                     * @Interface GlideElementSourceId
+                     * @description Internal type: 'source_id';
+                     * scalar_type: 'GUID';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementSourceId extends GlideElementDocumentId'.
+                     */
+                    export interface GlideElementSourceId extends GlideElementDocumentId { }
+
+                    /**
+                     * Represents the "Source Name" element type ("com.glide.script.glide_elements.GlideElementSourceName" Java class).
+                     * @export
+                     * @Interface GlideElementSourceName
+                     * @description Internal type: 'source_name';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementSourceName extends GlideElement implements IAppsConstants'.
+                     */
+                    export interface GlideElementSourceName extends GlideElement { }
+
+                    /**
+                     * Represents the "Source Table" element type ("com.glide.script.glide_elements.GlideElementSourceTable" Java class).
+                     * @export
+                     * @Interface GlideElementSourceTable
+                     * @description Internal type: 'source_table';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementSourceTable extends GlideElement'.
+                     */
+                    export interface GlideElementSourceTable extends GlideElement { }
+
+                    /**
+                     * Represents the "System Class Name" element type ("com.glide.script.glide_elements.GlideElementSysClassName" Java class).
+                     * @export
+                     * @Interface GlideElementSysClassName
+                     * @description Internal type: 'sys_class_name';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementSysClassName extends GlideElementObject implements com.glide.util.IConstants, com.glide.util.IProperties'.
+                     */
+                    export interface GlideElementSysClassName extends GlideElementObject { }
+
+                    /**
+                     * Represents the "Translated Field" element type ("com.glide.script.glide_elements.GlideElementTranslatedField" Java class).
+                     * @export
+                     * @Interface GlideElementTranslatedField
+                     * @description Internal type: 'translated_field';
+                     * scalar_type: 'string'
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementTranslatedField extends GlideElement implements com.glide.util.IConstants, IGlideElementPreTranslatable'.
+                     */
+                    export interface GlideElementTranslatedField extends GlideElement { }
+
+                    /**
+                     * Represents the "Translated HTML" element type ("com.glide.script.glide_elements.GlideElementTranslatedHTML" Java class).
+                     * @export
+                     * @Interface GlideElementTranslatedHTML
+                     * @description Internal type: 'translated_html';
+                     * scalar_type: 'string'; scalar_length: 65536;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementTranslatedHTML extends GlideElementTranslatedText'.
+                     */
+                    export interface GlideElementTranslatedHTML extends GlideElementTranslatedText { }
+
+                    /**
+                     * Represents the "Translated Text" element type ("com.glide.script.glide_elements.GlideElementTranslatedText" Java class).
+                     * @export
+                     * @Interface GlideElementTranslatedText
+                     * @description Internal type: 'translated_text';
+                     * scalar_type: 'string'
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementTranslatedText extends GlideElement implements com.glide.util.IConstants, IAuditor, IGlideElementPreTranslatable, IGlideElementPreOptimizable'.
+                     */
+                    export interface GlideElementTranslatedText extends GlideElement { }
+
+                    /**
+                     * Represents the "URL" element type ("com.glide.script.glide_elements.GlideElementURL" Java class).
+                     * @export
+                     * @Interface GlideElementURL
+                     * @description Internal type: 'url';
+                     * scalar_type: 'string'; scalar_length: 1024;
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementURL extends GlideElement'.
+                     */
+                    export interface GlideElementURL extends GlideElement { }
+
+                    /**
+                     * Represents the "Image" element type ("com.glide.script.glide_elements.GlideElementUserImage" Java class).
+                     * @export
+                     * @Interface GlideElementUserImage
+                     * @description Internal type: 'user_image';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementUserImage extends GlideElementViewable'.
+                     */
+                    export interface GlideElementUserImage extends GlideElementViewable { }
+
+                    /**
+                     * Represents the "Variable Conditions" element type ("com.glide.script.glide_elements.GlideElementVariableConditions" Java class).
+                     * @export
+                     * @Interface GlideElementVariableConditions
+                     * @description Internal type: 'variable_conditions';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementVariableConditions extends GlideElementConditions'.
+                     */
+                    export interface GlideElementVariableConditions extends GlideElementConditions { }
+
+                    /**
+                     * Represents the "Variable template value" element type ("com.glide.script.glide_elements.GlideElementVariableTemplateValue" Java class).
+                     * @export
+                     * @Interface GlideElementVariableTemplateValue
+                     * @description Internal type: 'variable_template_value';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementVariableTemplateValue extends GlideElementConditions'.
+                     */
+                    export interface GlideElementVariableTemplateValue extends GlideElementConditions { }
+
+                    /**
+                     * Represents the "Video" element type ("com.glide.script.glide_elements.GlideElementVideo" Java class).
+                     * @export
+                     * @Interface GlideElementVideo
+                     * @description Internal type: 'video';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementVideo extends GlideElementViewable'.
+                     */
+                    export interface GlideElementVideo extends GlideElementViewable { }
+
+                    /**
+                     * Represents the "com.glide.script.glide_elements.GlideElementViewable" Java class.
+                     * @export
+                     * @Interface GlideElementViewable
+                     * @description Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public abstract class GlideElementViewable extends GlideElement'.
+                     */
+                    export interface GlideElementViewable extends GlideElement { }
+
+                    /**
+                     * Represents the "Workflow Conditions" element type ("com.glide.script.glide_elements.GlideElementWorkflowConditions" Java class).
+                     * @export
+                     * @Interface GlideElementWorkflowConditions
+                     * @description Internal type: 'workflow_conditions';
+                     * scalar_type: 'string';
+                     * Library: glide-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementWorkflowConditions extends GlideElementConditions'.
+                     */
+                    export interface GlideElementWorkflowConditions extends GlideElementConditions { }
                 }
 
                 export namespace system {
@@ -5199,7 +5995,8 @@ declare namespace Packages {
                  * Represents the "com.glide.stages.GlideElementWorkflow" Java class.
                  * @export
                  * @Interface GlideElementWorkflow
-                 * @description Library: glide-16.6.0.3.jar;
+                 * @description Internal type: '';
+                 * Library: glide-16.6.0.3.jar;
                  * Java declaration: 'public class GlideElementWorkflow extends com.glide.script.GlideElement'.
                  */
                 export interface GlideElementWorkflow extends script.GlideElement {
@@ -5218,6 +6015,15 @@ declare namespace Packages {
                 }
 
                 export namespace cache {
+                    /**
+                     * Represents the "com.glide.sys.cache.LRUCache" class.
+                     * @export
+                     * @interface LRUCache
+                     * @extends {java.lang.Object}
+                     * @extends {java.util.HashMap<any, any>}
+                     */
+                    export interface LRUCache extends java.lang.Object, java.util.HashMap<any, any> { }
+
                     export namespace record_change {
                         export namespace storage {
                             /**
@@ -5278,6 +6084,20 @@ declare namespace Packages {
                      */
                     export interface TransactionReplayRunner extends script.fencing.ScopedScriptableObject {
                     }
+                }
+            }
+
+            export namespace ts {
+                export namespace util {
+                    /**
+                     * Represents the "com.glide.ts.util.GlideElementAttachmentList" Java class.
+                     * @export
+                     * @interface GlideElementAttachmentList
+                     * @description Internal type: '';
+                     * Library: glide-ts-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementAttachmentList extends script.GlideElement'.
+                     */
+                    export interface GlideElementAttachmentList extends script.GlideElement { }
                 }
             }
 
@@ -5399,24 +6219,63 @@ declare namespace Packages {
 
             export namespace vars2 {
                 /**
-                 * Represents the "com.glide.vars2.GlideElementVariable" Java class.
+                 * Represents the "Glide Var" element type ("com.glide.vars2.GlideElementGlideVar" Java class).
                  * @export
-                 * @Interface GlideElementVariable
-                 * @description Library: glide-variables-16.6.0.3.jar;
-                 * Java declaration: 'public class GlideElementVariable extends com.glide.script.glide_elements.GlideElementGlideObject implements com.glide.script.IGlideElementVariable, com.glide.sys.security.IDecryptable'.
+                 * @Interface GlideElementGlideVar
+                 * @description Internal type: 'glide_var',
+                 * scalar_type: 'string';
+                 * Library: glide-variables-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementGlideVar extends com.glide.script.GlideElement implements com.glide.script.IGlideElementGlideVar'.
                  */
-                export interface GlideElementVariable extends script.glide_elements.GlideElementGlideObject {
+                export interface GlideElementGlideVar extends script.glide_elements.GlideElementGlideObject {
                 }
 
                 /**
-                 * Represents the "com.glide.vars2.GlideElementVariables" Java class.
+                 * Represents the "com.glide.vars2.GlideElementVariable" Java class.
+                 * @export
+                 * @Interface GlideElementVariable
+                 * @description Internal type: 'variable',
+                 * Library: glide-variables-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementVariable extends com.glide.script.glide_elements.GlideElementGlideObject implements com.glide.script.IGlideElementVariable, com.glide.sys.security.IDecryptable'.
+                 */
+                 export interface GlideElementVariable extends script.glide_elements.GlideElementGlideObject {
+                }
+
+                /**
+                 * Represents the "Variables" element type ("com.glide.vars2.GlideElementVariables" Java class).
                  * @export
                  * @Interface GlideElementVariables
-                 * @description Library: glide-variables-16.6.0.3.jar;
+                 * @description Internal type: 'variables',
+                 * scalar_type: 'string';
+                 * Library: glide-variables-16.6.0.3.jar;
                  * Java declaration: 'public class GlideElementVariables extends com.glide.script.GlideElement implements com.glide.script.IGlideElementVariables, com.glide.script.ICustomAudit, com.glide.script.IAuditor'.
                  */
                 export interface GlideElementVariables extends script.GlideElement {
                 }
+
+                /**
+                 * Represents the "com.glide.vars2.GlideElementHierarchicalVariables" Java class.
+                 * @export
+                 * @Interface GlideElementHierarchicalVariables
+                 * @description Internal type: 'hierarchical_variables',
+                 * Library: glide-variables-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementHierarchicalVariables extends GlideElementVariables implements com.glide.script.ICustomAudit, com.glide.script.IAuditor'.
+                 */
+                export interface GlideElementHierarchicalVariables extends script.GlideElement {
+                }
+            }
+
+            export namespace wiki {
+                /**
+                 * Represents the "Wiki" element type ("com.glide.wiki.GlideElementWikiText" Java class).
+                 * @export
+                 * @interface GlideElementWikiText
+                 * @description Internal type: 'wiki_text';
+                 * scalar_type: 'string'; scalar_length: 65536;
+                 * Library: glide-apps-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementWikiText extends script.GlideElement'.
+                 */
+                export interface GlideElementWikiText extends script.GlideElement { }
             }
         }
 
@@ -5598,6 +6457,21 @@ declare namespace Packages {
                 }
             }
 
+            export namespace clotho {
+                export namespace script {
+                    /**
+                     * Represents the "com.snc.clotho.script.GlideElementMetric" Java class.
+                     * @export
+                     * @interface GlideElementMetric
+                     * @extends {com.glide.script.GlideElement}
+                     * @description Internal type: 'metric';
+                     * Library: glide-clotho-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementMetric extends com.glide.script.GlideElement'.
+                     */
+                    export interface GlideElementMetric extends com.glide.script.GlideElement { }
+                }
+            }
+
             export namespace cmdb {
                 export namespace relations {
                     export namespace script {
@@ -5614,6 +6488,44 @@ declare namespace Packages {
                 }
             }
 
+            export namespace datastructure {
+                /**
+                 * Represents the "Data Array" element type ("com.snc.datastructure.GlideElementDataArray" Java class).
+                 * @export
+                 * @interface GlideElementDataArray
+                 * @extends {com.glide.script.GlideElement}
+                 * @description Internal type: 'data_array';
+                 * scalar_type: 'string'; scalar_length: 65535;
+                 * Library: glide-workflow-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementDataArray extends com.glide.script.GlideElement'.
+                 */
+                export interface GlideElementDataArray extends com.glide.script.GlideElement { }
+                
+                /**
+                 * Represents the "Data Object" element type ("com.snc.datastructure.GlideElementDataObject" Java class).
+                 * @export
+                 * @interface GlideElementDataObject
+                 * @extends {com.glide.script.GlideElement}
+                 * @description Internal type: 'data_object';
+                 * scalar_type: 'string'; scalar_length: 65535;
+                 * Library: glide-workflow-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementDataObject extends com.glide.script.GlideElement'.
+                 */
+                 export interface GlideElementDataObject extends com.glide.script.GlideElement { }
+                
+                /**
+                 * Represents the "Data Structure" element type ("com.snc.datastructure.GlideElementDataStructure" Java class).
+                 * @export
+                 * @interface GlideElementDataStructure
+                 * @extends {com.glide.script.GlideElement}
+                 * @description Internal type: 'data_structure';
+                 * scalar_type: 'string'; scalar_length: 800;
+                 * Library: glide-workflow-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementDataStructure extends ​glide.​glideobject.GlideObject'.
+                 */
+                 export interface GlideElementDataStructure extends ​glide.​glideobject.AGlideObject { }
+            }
+
             export namespace pa {
                 export namespace api {
                     /**
@@ -5625,6 +6537,20 @@ declare namespace Packages {
                      */
                     export interface PAScorecard extends glide.script.fencing.ScopedScriptableObject {
                     }
+                }
+
+                export namespace dc {
+                    /**
+                     * Represents the "Breakdown Element" element type ("com.snc.pa.dc.GlideElementBreakdownElement" Java class).
+                     * @export
+                     * @interface GlideElementBreakdownElement
+                     * @extends {com.glide.script.GlideElement}
+                     * @description Internal type: 'breakdown_element';
+                     * scalar_type: 'GUID'; scalar_length: 32;
+                     * Library: glide-analytics-16.6.0.3.jar;
+                     * Java declaration: 'public class GlideElementBreakdownElement extends com.glide.script.GlideElement'.
+                     */
+                     export interface GlideElementBreakdownElement extends com.glide.script.GlideElement { }
                 }
 
                 export namespace js {
@@ -5659,6 +6585,19 @@ declare namespace Packages {
                     export interface ScopedPATarget extends java.lang.Object {
                     }
                 }
+            }
+
+            export namespace project_workbench {
+                /**
+                 * Represents the "com.snc.project_workbench.GlideElementCompositeField" Java class.
+                 * @export
+                 * @interface GlideElementCompositeField
+                 * @extends {com.glide.script.GlideElement}
+                 * @description Internal type: '';
+                 * Library: glide-project-workbench-16.6.0.3.jar;
+                 * Java declaration: 'public class GlideElementCompositeField extends com.glide.script.GlideElement implements PWConstants'.
+                 */
+                 export interface GlideElementCompositeField extends com.glide.script.GlideElement { }
             }
 
             export namespace skills_management {

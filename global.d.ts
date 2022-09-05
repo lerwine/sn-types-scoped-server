@@ -1,22 +1,34 @@
 /// <reference path="$$rhino.d.ts" />
 /// <reference path="Packages.d.ts" />
 /// <reference path="GlideScriptable.d.ts" />
+/// <reference path="sn_kmf_ns.d.ts" />
 
 /**
  * Query operator values that can be used for string value comparisons.
+ * @typedef {("=" | "!=" | "IN" | "NOT IN" | "STARTSWITH" | "ENDSWITH" | "CONTAINS" | "DOES NOT CONTAIN" | "INSTANCEOF")}
  */
  declare type StringQueryOperator = "=" | "!=" | "IN" | "NOT IN" | "STARTSWITH" | "ENDSWITH" | "CONTAINS" | "DOES NOT CONTAIN" | "INSTANCEOF";
 
- /**
-  * Query operator values that can be used for numerical operations.
-  */
- declare type NumberQueryOperator = "=" | "!=" | ">" | ">=" | "<" | "<=";
- 
- /**
-  * Query operator values.
-  */
- declare type QueryOperator = StringQueryOperator | NumberQueryOperator;
- 
+/**
+ * Query operator values that can be used for numerical operations.
+ * @typedef {("=" | "!=" | ">" | ">=" | "<" | "<=")}
+ */
+declare type NumberQueryOperator = "=" | "!=" | ">" | ">=" | "<" | "<=";
+
+/**
+ * Query operator values.
+ * @typedef {(StringQueryOperator | NumberQueryOperator)}
+ */
+declare type QueryOperator = StringQueryOperator | NumberQueryOperator;
+
+/**
+ * Type values for the "Type" field of the "Service Availibility" table (service_availility.type).
+ * @typedef {("daily" | "weekly" | "monthly" | "annually" | "last7days" | "last30days" | "last12months")}
+ */
+declare type service_availabilityType = "daily" | "weekly" | "monthly" | "annually" | "last7days" | "last30days" | "last12months";
+
+export type AggregateType = "min" | "max" | "sum" | "avg" | "count";
+
 declare namespace global {
     /**
      * ArrayUtil API is a script include with useful functions for working with JavaScript arrays.
@@ -357,15 +369,58 @@ declare namespace global {
     }
 
     /**
-     * AttachmentUtils utilities
+     * Attachment utilities
      * @export
      * @class AttachmentUtils
      */
     export class AttachmentUtils {
-        // TODO: Add members for global.AttachmentUtils
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=63f582395f68320011442abd7f4666b7
+        attInptStream: GlideScriptableInputStream;
+        
+        /**
+         * Creates an instance of AttachmentUtils.
+         * @param {$$rhino.String} attachmentSysId - Attachment sys_id.
+         * @memberof AttachmentUtils
+         */
+        constructor(attachmentSysId: $$rhino.String);
+        
+        /**
+         * Gets MD5 checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
+         * @return {$$rhino.String} MD5 checksum string.
+         * @memberof AttachmentUtils
+         */
+        getMD5ChecksumFromAttachment(): $$rhino.String;
+    
+        /**
+         * Gets SHA1 checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
+         * @return {$$rhino.String} SHA1 checksum string
+         */
+        getSHA1ChecksumFromAttachment(): $$rhino.String;
+        
+        /**
+         * Gets SHA256 checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
+         * @return {$$rhino.String} SHA256 checksum string
+         */
+        getSHA256ChecksumFromAttachment(): $$rhino.String;
+        
+        /**
+         * Gets MD5 Hex checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
+         * @return {$$rhino.String} MD5 Hex checksum string
+         */
+        getMD5HexChecksumFromAttachment(): $$rhino.String;
+    
+        /**
+         * Gets SHA1 Hex checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
+         * @return {$$rhino.String} SHA1 Hex checksum string
+         */
+        getSHA1HexChecksumFromAttachment(): $$rhino.String;
 
-        type: "AttachmentUtils"
+        /**
+         * Gets SHA256 Hex checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
+         * @return {$$rhino.String} SHA256 HEx checksum string
+         */
+        getSHA256HexChecksumFromAttachment(): $$rhino.String;
+
+        type: "AttachmentUtils";
     }
 
     /**
@@ -375,22 +430,32 @@ declare namespace global {
      * @class AvailabilityCalculator
      */
     export class AvailabilityCalculator {
-        // TODO: Add members for global.AvailabilityCalculator
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=f68ee4d70a0a0bb900bdb7319b857ce3
-
-        type: "AvailabilityCalculator"
+        SCHEDULES: GlideLRUCache;
+        cmdb_ci: string | null;
+        commitment: string | null;
+        sumCount: number;
+        constructor();
+        calculate(start: GlideDateTime, end: GlideDateTime, type: service_availabilityType): void;
+        setCommitment(id: string): void;
+        setCI(cmdb_ci: string): void;
     }
 
-    /**
-     * TODO: Document global.AvailabilitySummarizer
-     * @export
-     * @class AvailabilitySummarizer
-     */
-    export class AvailabilitySummarizer {
-        // TODO: Add members for global.AvailabilitySummarizer
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=f7f5eafb0a0a0bb900720edb23a717ca
+    export class AvailabilityRecord {
+        type : service_availabilityType;
+        constructor(cmdb_ci: $$rhino.String, start: GlideDateTime, end: GlideDateTime);
+        post(commitment: $$rhino.String, absolute: GlideDuration, scheduled: GlideDuration, absolute_avail: $$rhino.Number, scheduled_avail: $$rhino.Number, absolute_count: $$rhino.Number,
+            scheduled_count: $$rhino.Number, ast: GlideDuration, mtbf: GlideDuration, mtrs: GlideDuration, allowed: GlideDuration, met: $$rhino.Boolean): void;
+        setType(t: service_availabilityType): void;
+    }
 
-        type: "AvailabilitySummarizer"
+    export class AvailabilitySummarizer {
+        cmdb_ci: string | null;
+        commitment: string | null;
+        start: GlideDateTime;
+        constructor();
+        summarize(start?: string | GlideDateTime): void;
+        setCommitment(id: string): void;
+        setCI(cmdb_ci: string): void;
     }
 
     /**
@@ -399,46 +464,34 @@ declare namespace global {
      * @class CalendarUtils
      */
     export class CalendarUtils {
-        // TODO: Add members for global.CalendarUtils
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=aa44ba30d7432200465eef637e610304
+        static readonly UTC_DATE_FORMAT = "yyyy-MM-dd";
+        static readonly UTC_TIME_FORMAT = "HH:mm:ss";
+    
+        log: GSLog;
 
-        type: "CalendarUtils"
-    }
+        /**
+         * Creates an instance of CalendarUtils.
+         * @memberof CalendarUtils
+         */
+        constructor();
+    
+        /**
+         * Get date format from user defined format or system format if not found, but converted to DHTMLX format as per spec:
+         * {@link http://docs.dhtmlx.com/scheduler/settings_format.html}
+         * @return {string} DHTMLX user date format or system date format.
+         * @memberof CalendarUtils
+         */
+        getUserDateFormat(): string;
+    
+        /**
+         * Get time format from user defined format or system format if not found, but converted to DHTMLX format as per spec:
+         * {@link http://docs.dhtmlx.com/scheduler/settings_format.html}
+         * @return {string} DHTMLX user time format or system time format.
+         * @memberof CalendarUtils
+         */
+        getUserTimeFormat(): string;
 
-    /**
-     * If this script include is modified to customize price calculation then the following property: glide.sc.use_custom_pricegenerator must be set to: true
-     * @export
-     * @class CatalogPriceCalculator
-     */
-    export class CatalogPriceCalculator {
-        // TODO: Add members for global.CatalogPriceCalculator
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=292768ba0a0a0b4400c27a5190b1c3be
-
-        type: "CatalogPriceCalculator"
-    }
-
-    /**
-     * If this script include is modified to customize price calculation then the following property: glide.sc.use_custom_pricegenerator must be set to: true
-     * @export
-     * @class CatalogRecurringPriceCalculator
-     */
-    export class CatalogRecurringPriceCalculator {
-        // TODO: Add members for global.CatalogRecurringPriceCalculator
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=756351003701300054b6a3549dbe5dda
-
-        type: "CatalogRecurringPriceCalculator"
-    }
-
-    /**
-     * TODO: Document global.CatalogServiceFulfillmentStepUtil
-     * @export
-     * @class CatalogServiceFulfillmentStepUtil
-     */
-    export class CatalogServiceFulfillmentStepUtil {
-        // TODO: Add members for global.CatalogServiceFulfillmentStepUtil
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=61034fcc87122010c84e4561d5cb0ba3
-
-        type: "CatalogServiceFulfillmentStepUtil"
+        type: "CalendarUtils";
     }
 
     /**
@@ -447,34 +500,17 @@ declare namespace global {
      * @class ContentTypeValidator
      */
     export class ContentTypeValidator {
-        // TODO: Add members for global.ContentTypeValidator
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=85ff0a4c5b6f001001fb0c370581c7fd
+        defaultSupportedContentTypes: "image/svg+xml";
+	
+	    constructor();
 
-        type: "ContentTypeValidator"
+        isValidType(attachment: GlideRecord, userDefinedSupportedContentTypes?: string[]): boolean;
     }
 
-    /**
-     * Document Viewer : Ajax calls to conversion api.
-     * @export
-     * @class ConversionRequestUtil
-     */
-    export class ConversionRequestUtil extends AbstractAjaxProcessor {
-        // TODO: Add members for global.ConversionRequestUtil
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=ac8b84849313230004e6dc49157ffbe2
-
-        type: "ConversionRequestUtil"
-    }
-
-    /**
-     * TODO: Document global.CurrencyConversionTableList
-     * @export
-     * @class CurrencyConversionTableList
-     */
     export class CurrencyConversionTableList {
-        // TODO: Add members for global.CurrencyConversionTableList
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=91c38a405b2312008e312a3c11f91ac9
-
-        type: "CurrencyConversionTableList"
+        constructor();
+        process(): string[];
+        type: "CurrencyConversionTableList";
     }
 
     /**
@@ -483,10 +519,30 @@ declare namespace global {
      * @class EncryptionCommons
      */
     export class EncryptionCommons {
-        // TODO: Add members for global.EncryptionCommons
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=dffc03e137b33200d62004368e41f10f
+        constructor();
+        
+        /**
+         * Lists all fields that can be encrypted for a given table.
+         * @param {string} tableName - The name of the table.
+         * @param {{ (ed: GlideElementDescriptor, fieldName: $$rhino.String, ec?: EncryptionCommons): boolean }} [additionalValidator] - Validator that returns true if the field can be encrypted.
+         * @return {$$rhino.String[]} Name sof encryptable fields for the given table.
+         * @memberof EncryptionCommons
+         */
+        getEncryptableFieldsForTable(tableName: string, additionalValidator?: { (ed: GlideElementDescriptor, fieldName: $$rhino.String, ec: EncryptionCommons): boolean }): $$rhino.String[];
+        
+        addToArrayTablesWithBooleanAttributeSetToTrue(array: $$rhino.String[], attributeName: $$rhino.String): $$rhino.String[];
+    
+        /**
+         * Tests whether table is marked for auditing.
+         * @param {string} tableName - The name of the table.
+         * @return {boolean} True if the table is marked for auditing; otherwise, false.
+         * @memberof EncryptionCommons
+         */
+        isTableAudited(tableName: string): boolean;
+    
+        getUsableCryptoModules(): $$rhino.String[];
 
-        type: "EncryptionCommons"
+        type: "EncryptionCommons";
     }
 
     /**
@@ -495,35 +551,346 @@ declare namespace global {
      * @class EncryptionJobTypeChoices
      */
     export class EncryptionJobTypeChoices {
-        // TODO: Add members for global.EncryptionJobTypeChoices
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=8e7fcd5877100010bef6d0adda1061f5
-
-        type: "EncryptionJobTypeChoices"
+        constructor();
+        process(): GlideChoiceList;
+        type: "EncryptionJobTypeChoices";
     }
 
-    /**
-     * TODO: Document global.GlideCryptoModule
-     * @export
-     * @class GlideCryptoModule
-     */
     export class GlideCryptoModule {
-        // TODO: Add members for global.GlideCryptoModule
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=250a3f78cb103300449b78d5634c9c08
-
-        type: "GlideCryptoModule"
+        static get(): GlideCryptoModule;
+        static getModule(cryptoModuleName: $$rhino.String): GlideCryptoModule;
+        CRYPTO_MODULE: sn_kmf_ns.KMFCryptoModule | null;
+        constructor(cryptoModule: sn_kmf_ns.KMFCryptoModule);
+        encryptData(data: $$rhino.String): $$rhino.String;
+        wrapKeyFromBytes(data: $$rhino.String): $$rhino.String;
+        wrapKeyFromBytesForAlgorithm(data: $$rhino.String, algorithm: $$rhino.String): $$rhino.String;
+        wrapKeyFromSysId(data: $$rhino.String): $$rhino.String;
+        decryptData(data: $$rhino.String): $$rhino.String;
+        unwrapKey(data: $$rhino.String): $$rhino.String;
+        unwrapKeyForAlgorithm(data: $$rhino.String, algorithm: $$rhino.String): $$rhino.String;
+        generateMac(data: $$rhino.String): $$rhino.String;
+        verifyMac(data: $$rhino.String, expectedMac: $$rhino.String): $$rhino.Boolean;
+        asymmetricEncryptData(data: $$rhino.String): $$rhino.String;
+        asymmetricWrapKeyFromBytes(data: $$rhino.String): $$rhino.String;
+        asymmetricWrapKeyFromBytesForAlgorithm(data: $$rhino.String, algorithm: $$rhino.String): $$rhino.String;
+        asymmetricWrapKeyFromSysId(data: $$rhino.String): $$rhino.String;
+        asymmetricDecryptData(data: $$rhino.String): $$rhino.String;
+        asymmetricUnwrapKey(data: $$rhino.String): $$rhino.String;
+        asymmetricUnwrapKeyForAlgorithm(data: $$rhino.String, algorithm: $$rhino.String): $$rhino.String;
+        sign(data: $$rhino.String): $$rhino.String;
+        verifySignature(data: $$rhino.String, signature: $$rhino.String): $$rhino.Boolean;
+        discard(): void;
+        type: "GlideCryptoModule";
     }
 
     /**
-     * An alternative to GlideRecord to perform CRUD operations on record data from server-side scripts.
+     * The GlideQuery API is an alternative to GlideRecord to perform CRUD operations on record data from server-side scripts.
      * @export
      * @class GlideQuery
+     * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/GlideQueryAPI}
      * @see {@link https://docs.servicenow.com/bundle/rome-application-development/page/app-store/dev_portal/API_reference/GlideQuery/concept/GlideQueryGlobalAPI.html}
      */
     export class GlideQuery {
         // TODO: Add members for global.GlideQuery
-        // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=864c9ebf73631300bb513198caf6a721
+        // https://inscomscd.servicenowservices.com/nav_to.do?uri=sys_script_include.do?sys_id=864c9ebf73631300bb513198caf6a721
 
-        type: "GlideQuery"
+        /**
+         * Instantiates a GlideQuery object used to build and execute record queries.
+         * @param {$$rhino.String} table - Name of table to query.
+         * @memberof GlideQuery
+         */
+        constructor(table: $$rhino.String);
+
+        /**
+         * Aggregates a field using a specified aggregation function.
+         * @param {$$rhino.String} aggregateType - The type of aggregation function to perform.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         * @description Use this method to build queries that aggregate against multiple fields or use multiple aggregate functions,
+         * or if you must use the {@link #groupBy()} method. If you only want to aggregate against one field with one function,
+         * and you don't need to use {@link #groupBy()}, then use {@link #avg()}, {@link #min()}, {@link #max()} or {@link #count()}, instead.
+         */
+        aggregate(aggregateType: AggregateType, field: $$rhino.String): GlideQuery;
+
+        /**
+         * Returns the aggregate average of a given numeric field.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {Optional<$$rhino.Number>} Object that contains the aggregate average of the given field.
+         * @memberof GlideQuery
+         * @description You can only use this method on Integer, Long, Floating Point Number, Double and Currency fields.
+         */
+        avg(field: $$rhino.String): Optional<$$rhino.Number>;
+
+        /**
+         * Returns the number of records that match the query.
+         * @return {$$rhino.Number} Number of records that match the query.
+         * @memberof GlideQuery
+         */
+        count(): $$rhino.Number;
+
+        /**
+         * Deletes all records in the table specified by the preceding Where clauses.
+         * @memberof GlideQuery
+         */
+        deleteMultiple(): void;
+
+        /**
+         * Disables updating system fields, or fields with a name that starts with the sys prefix, such as sys_created_on, sys_updated_on, and sys_mod_count.
+         * Only applies to the specified query.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        disableAutoSysFields(): GlideQuery;
+
+        /**
+         * Disables any business rules, flows, workflows, or audit records that would run or be created as the result of the query.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        disableWorkflow(): GlideQuery;
+
+        /**
+         * Forces a database update even when no record changes are made. For example, you can use this method to force a business rule to execute.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        forceUpdate(): GlideQuery;
+
+        /**
+         * Returns a single record from the query.
+         * @param {$$rhino.String} key - Sys_id of the record to return.
+         * @param {$$rhino.String[]} [selectedFields] - Optional additional fields to return in the result.
+         * The system always returns the sys_id.
+         * @return {Optional<{ [key: string]: $$rhino.String; }>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        get(key: $$rhino.String, selectedFields?: $$rhino.String[]): Optional<{ [key: string]: $$rhino.String; }>;
+
+        /**
+         * Returns an Optional object containing a single record based on a set of name-value pairs to query by.
+         * Assumes the '=' operator for each name-value pair.
+         * @param {{ [key: string]: any; }} keyValues - Object where the keys are the name of the fields, and the values are the values to query for.
+         * @param {$$rhino.String[]} [selectedFields] - Optional additional fields to return in the result.
+         * The system always returns the sys_id.
+         * @return {Optional<{ [key: string]: $$rhino.String; }>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        getBy(keyValues: { [key: string]: any; }, selectedFields?: $$rhino.String[]): Optional<{ [key: string]: $$rhino.String; }>;
+        
+        /**
+         * Groups the query results by a designated field or fields.
+         * @param {($$rhino.String | $$rhino.String[])} fields - Field or fields to group the results by.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         * @description You must use this method with the {@link #aggregate} method.
+         */
+        groupBy(fields: $$rhino.String | $$rhino.String[]): GlideQuery;
+
+        /**
+         * Filters aggregate groups so that you can display only groups of results that match a specified condition.
+         * @param {AggregateType} aggregateType - The type of aggregation function to perform.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @param {NumberQueryOperator} operator - Numeric operator to use in the operation.
+         * @param {$$rhino.Number} value - Number value to use in the operation.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        having(aggregateType: AggregateType, field: $$rhino.String, operator: NumberQueryOperator, value: $$rhino.Number): GlideQuery;
+
+        /**
+         * Inserts a record and returns an Optional object containing the record.
+         * @param {{ [key: string]: any; }} keyValues - Object containing name-value pairs to insert into the record. Unspecified fields will be null.
+         * @param {$$rhino.String[]} [selectedFields] - Optional additional fields to return in the result.
+         * The system always returns the sys_id.
+         * @return {Optional<{ [key: string]: $$rhino.String; }>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        insert(keyValues: { [key: string]: any; }, selectedFields?: $$rhino.String[]): Optional<{ [key: string]: $$rhino.String; }>;
+
+        /**
+         * Updates an existing record, or inserts a new record if one does not already exist.
+         * @param {{ [key: string]: any; }} changes - Object containing name-value pairs to update or insert into the record.
+         * @param {$$rhino.String[]} [selectedFields] - Optional additional fields to return in the result.
+         * The system always returns the sys_id.
+         * @return {Optional<{ [key: string]: $$rhino.String; }>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        insertOrUpdate(changes: { [key: string]: any; }, selectedFields?: $$rhino.String[]): Optional<{ [key: string]: $$rhino.String; }>;
+
+        /**
+         * Limits the number of records returned in a query.
+         * @param {$$rhino.Number} limit - Number of records to return.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        limit(limit: $$rhino.Number): GlideQuery;
+
+        /**
+         * Returns the aggregate maximum of a given field.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {Optional<$$rhino.String>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        max(field: $$rhino.String): Optional<$$rhino.String>;
+
+        /**
+         * Returns the aggregate minimum of a given field.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {Optional<$$rhino.String>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        min(field: $$rhino.String): Optional<$$rhino.String>;
+
+        /**
+         * Orders the returned result in ascending order by a given field.
+         * @param {$$rhino.String} fields - Comma-delimited fields to order the result by in ascending order.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        orderBy(fields: $$rhino.String): GlideQuery;
+
+        /**
+         * Orders the returned result in descending order by a given field.
+         * @param {$$rhino.String} fieldOrAggregate - If the query does not use the aggregate() method, pass the field to order the results by.
+         * If the query uses the {@link #aggregate} method, pass the type of aggregation function ({@link AggregateType}) to perform.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        orderByDesc(fieldOrAggregate: $$rhino.String, field: $$rhino.String): GlideQuery;
+
+        /**
+         * Adds an OR clause to a query that returns values based on a given condition.
+         * @param {($$rhino.String | GlideQuery)} fieldOrQuery - Field or another GlideQuery object used in the where clause.
+         * If passing a field, you can dot-walk to a desired value.
+         * @param {$$rhino.Nilable<QueryOperator>} operator - Optional operator used in the where clause.
+         * If you do not pass an argument, the system uses the = operator.
+         * @param {*} value - Value used in the where clause.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        orWhere(fieldOrQuery: $$rhino.String | GlideQuery, operator: $$rhino.Nilable<QueryOperator>, value: any): GlideQuery;
+
+        /**
+         * Adds an OR clause that returns records that do not contain a null value in a given field.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        orWhereNotNull(field: $$rhino.String): GlideQuery;
+
+        /**
+         * Adds an OR clause to a query that returns records that contain a null value in a given field.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        orWhereNull(field: $$rhino.String): GlideQuery;
+
+        /**
+         * Returns the results of the query as a Stream object containing the specified fields.
+         * @param {($$rhino.String | $$rhino.String[])} fields - Fields to display in the result.
+         * You can provide any number of fields as arguments, dot-walk to a desired value, or use a flag.
+         * @return {Stream<{ [key: string]: $$rhino.String; }>} Object used to interact with a stream of items such as records.
+         * @memberof GlideQuery
+         * @description You can append a flag to a field name to return the field's metadata instead of the field's value.
+         * For example, using the field name company$DISPLAY returns the display value of a company field. Possible flags include:
+         * DISPLAY=Returns the display value of a field;
+         * CURRENCY_CODE=Returns the currency code of a currency field;
+         * CURRENCY_DISPLAY=Returns the currency display value of a currency field;
+         * CURRENCY_STRING=Returns the currency string of a currency field.
+         */
+        select(fields: $$rhino.String | $$rhino.String[]): Stream<{ [key: string]: $$rhino.String; }>;
+
+        /**
+         * Returns the result of the query as an Optional object containing specified fields.
+         * @param {$$rhino.String} [fields] - Fields to display in the result.
+         * You can provide any number of fields as arguments, dot-walk to a desired value, or use a flag.
+         * @return {Optional<{ [key: string]: $$rhino.String; }>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         * @description You can append a flag to a field name to return the field's metadata instead of the field's value.
+         * For example, using the field name company$DISPLAY returns the display value of a company field. Possible flags include:
+         * DISPLAY=Returns the display value of a field;
+         * CURRENCY_CODE=Returns the currency code of a currency field;
+         * CURRENCY_DISPLAY=Returns the currency display value of a currency field;
+         * CURRENCY_STRING=Returns the currency string of a currency field.
+         */
+        selectOne(fields?: $$rhino.String): Optional<{ [key: string]: $$rhino.String; }>;
+
+        /**
+         * Returns the aggregate sum of a given numeric field.
+         * @param {$$rhino.String} field - Field on which to perform the operation.
+         * @return {Optional<$$rhino.Number>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         * @description You can only use this method on Integer, Long, Floating Point Number, Double and Currency fields.
+         */
+        sum(field: $$rhino.String): Optional<$$rhino.Number>;
+
+        /**
+         * Returns a GlideRecord or GlideAggregate object that represents the current query.
+         * @return {(GlideRecord | GlideAggregate)} GlideRecord or GlideAggregate object that contains the query.
+         * @memberof GlideQuery
+         * @description After transforming the query, use the query() method in the GlideRecord or GlideAggregate classes to query the database.
+         */
+        toGlideRecord(): GlideRecord | GlideAggregate;
+
+        /**
+         * Updates an existing record that matches the defined conditions.
+         * @param {{ [key: string]: any; }} changes - Object containing name-value pairs to update in the record. Names must match fields in the table.
+         * @param {$$rhino.String[]} [selectedFields] - Optional additional fields to return in the result.
+         * The system always returns the sys_id.
+         * @return {Optional<{ [key: string]: $$rhino.String; }>} Object used to interact with a single record.
+         * @memberof GlideQuery
+         */
+        update(changes: { [key: string]: any; }, selectedFields?: $$rhino.String[]): Optional<{ [key: string]: $$rhino.String; }>;
+
+        /**
+         * Updates all existing records that match the defined conditions. Returns the number of records updated.
+         * @param {{ [key: string]: any; }} changes - Object containing name-value pairs to update in the record. Names must match fields in the table.
+         * @return {{ rowCount: $$rhino.Number; }} Object containing the number of records that were updated.
+         * @memberof GlideQuery
+         */
+        updateMultiple(changes: { [key: string]: any; }): { rowCount: $$rhino.Number; };
+
+        /**
+         * Adds a Where clause to the query that returns values based on a given condition.
+         * @param {($$rhino.String | GlideQuery)} fieldOrQuery - Field or another GlideQuery object used in the where clause.
+         * @param {$$rhino.Nilable<$$rhino.String>} operator - Optional operator used in the where clause.
+         * If you do not pass an argument, the system uses the = operator.
+         * @param {*} value - Value used in the where clause.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         * @description Do not precede this method with the {@link #orWhere}, {@link #orWhereNull}, or {@link #orWhereNotNull} methods.
+         */
+        where(fieldOrQuery: $$rhino.String | GlideQuery, operator: $$rhino.Nilable<$$rhino.String>, value: any): GlideQuery;
+
+        /**
+         * Returns records that do not contain a null value in a given field.
+         * @param {$$rhino.String} field - Field used in the query.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         * @description Do not precede this method with the {@link #orWhere}, {@link #orWhereNull}, or {@link #orWhereNotNull} methods.
+         */
+        whereNotNull(field: $$rhino.String): GlideQuery;
+
+        /**
+         * Returns records that do not contain a null value in a given field.
+         * @param {$$rhino.String} field - Field used in the query.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         * @description Do not precede this method with the {@link #orWhere}, {@link #orWhereNull}, or {@link #orWhereNotNull} methods.
+         */
+        whereNull(field: $$rhino.String): GlideQuery;
+
+        /**
+         * Executes the query using the GlideRecordSecure API to securely query the database while honoring ACLs.
+         * @return {GlideQuery} The query object being built.
+         * @memberof GlideQuery
+         */
+        withAcls(): GlideQuery;
+
+        type: "GlideQuery";
     }
 
     /**
@@ -535,7 +902,7 @@ declare namespace global {
         // TODO: Add members for global.GlideQueryActions
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=89cffabe29300010fa9b76addd33871b
 
-        type: "GlideQueryActions"
+        type: "GlideQueryActions";
     }
 
     /**
@@ -547,7 +914,7 @@ declare namespace global {
         // TODO: Add members for global.GlideQueryEvaluator
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=d52b3c8a08013300fa9b4300d8d67a76
 
-        type: "GlideQueryEvaluator"
+        type: "GlideQueryEvaluator";
     }
 
     /**
@@ -560,7 +927,7 @@ declare namespace global {
         // TODO: Add members for global.GlideRecordUtil
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=e403d6dc0ab301530055d5d1ee14f1db
 
-        type: "GlideRecordUtil"
+        type: "GlideRecordUtil";
     }
 
     /**
@@ -572,7 +939,7 @@ declare namespace global {
         // TODO: Add members for global.GridCanvasLoader
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=264ff6c1d7230200a8228f0b6e6103ff
 
-        type: "GridCanvasLoader"
+        type: "GridCanvasLoader";
     }
 
     /**
@@ -586,7 +953,7 @@ declare namespace global {
         // TODO: Add members for global.GSLog
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=2e59987d0a0a2c3946f7118c070c03e3
 
-        type: "GSLog"
+        type: "GSLog";
     }
 
     /**
@@ -598,7 +965,7 @@ declare namespace global {
         // TODO: Add members for global.ICalUtil
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=cd165a27c3202200b6dcdfdc64d3aef4
 
-        type: "ICalUtil"
+        type: "ICalUtil";
     }
 
     /**
@@ -611,7 +978,7 @@ declare namespace global {
         // TODO: Add members for global.ICalUtilSNC
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=0944d627c3202200b6dcdfdc64d3aebb
 
-        type: "ICalUtilSNC"
+        type: "ICalUtilSNC";
     }
 
     /**
@@ -623,7 +990,7 @@ declare namespace global {
         // TODO: Add members for global.IncidentState
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=3d9e146f9fa302000391b89a442e7005
 
-        type: "IncidentState"
+        type: "IncidentState";
     }
 
     /**
@@ -647,7 +1014,7 @@ declare namespace global {
         // * getCsvValue
         // * getProblemFromIncident
 
-        type: "IncidentUtilsSNC"
+        type: "IncidentUtilsSNC";
     }
 
     /**
@@ -659,7 +1026,7 @@ declare namespace global {
         // TODO: Add members for global.InheritedRoleMapProcessor
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=5b354e909f0002003d5c77a0942e7042
 
-        type: "InheritedRoleMapProcessor"
+        type: "InheritedRoleMapProcessor";
     }
 
     /**
@@ -671,7 +1038,7 @@ declare namespace global {
         // TODO: Add members for global.ManyToManyChecker
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=8984a7c10f023300fd3e3632d4767e2a
 
-        type: "ManyToManyChecker"
+        type: "ManyToManyChecker";
     }
 
     /**
@@ -683,13 +1050,14 @@ declare namespace global {
         // TODO: Add members for global.NiceError
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=fc70ddc629230010fa9bf7f97d737e2e
 
-        type: "NiceError"
+        type: "NiceError";
     }
 
     /**
      * TODO: Document global.Optional
      * @export
      * @class Optional
+     * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/OptionalGlobalAPI}
      * @see {@link https://docs.servicenow.com/bundle/rome-application-development/page/app-store/dev_portal/API_reference/Optional/concept/OptionalGlobalAPI.html}
      */
     export class Optional<T> {
@@ -815,6 +1183,7 @@ declare namespace global {
      * @export
      * @class Stream
      * @template T The element type.
+     * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/StreamGlobalAPI}
      * @see {@link https://docs.servicenow.com/bundle/rome-application-development/page/app-store/dev_portal/API_reference/Stream/concept/StreamGlobalAPI.html}
      */
     export class Stream<T> {
@@ -968,7 +1337,7 @@ declare namespace global {
         // TODO: Add members for global.SysList
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=7d8f32c3c0a8016400e609be97b96d89
 
-        type: "SysList"
+        type: "SysList";
     }
 
     /**
@@ -980,7 +1349,7 @@ declare namespace global {
         // TODO: Add members for global.SysRelatedList
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=89171ef2c0a8016800449d9d0407bb27
 
-        type: "SysRelatedList"
+        type: "SysRelatedList";
     }
 
     /**
@@ -992,7 +1361,7 @@ declare namespace global {
         // TODO: Add members for global.SysUserList
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=7dc9266bc0a80164003bff257b3ff216
 
-        type: "SysUserList"
+        type: "SysUserList";
     }
 
     /**
@@ -1007,7 +1376,7 @@ declare namespace global {
         // TODO: Add members for global.TaskStateUtil
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=96e1ade7c0a80a6d381ba0c6aeb4ad61
 
-        type: "TaskStateUtil"
+        type: "TaskStateUtil";
     }
 
     /**
@@ -1019,7 +1388,7 @@ declare namespace global {
         // TODO: Add members for global.TaskUtils
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=584d558687c010100e3dd61e36cb0b8f
 
-        type: "TaskUtils"
+        type: "TaskUtils";
     }
 
     /**
@@ -1031,7 +1400,7 @@ declare namespace global {
         // TODO: Add members for global.TaskUtilsSNC
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=1cf5818a878010100e3dd61e36cb0b4a
 
-        type: "TaskUtilsSNC"
+        type: "TaskUtilsSNC";
     }
 
     /**
@@ -1043,7 +1412,7 @@ declare namespace global {
         // TODO: Add members for global.UnifiedConversationUtil
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=72ef5784e7431010748b42d6c2f6a9d1
 
-        type: "UnifiedConversationUtil"
+        type: "UnifiedConversationUtil";
     }
 
     /**
@@ -1055,7 +1424,7 @@ declare namespace global {
     export class UserSkillAnalyzer {
         // TODO: Add members for global.UserSkillAnalyzer
 
-        type: "UserSkillAnalyzer"
+        type: "UserSkillAnalyzer";
     }
 
     /**
@@ -1067,7 +1436,7 @@ declare namespace global {
     export class UserSkillRanking {
         // TODO: Add members for global.UserSkillRanking
 
-        type: "UserSkillRanking"
+        type: "UserSkillRanking";
     }
 
     /**
@@ -1079,7 +1448,7 @@ declare namespace global {
         // TODO: Add members for global.VAFieldValidator
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=1e2e643a5bd200101f254d3ba881c7d9
 
-        type: "VAFieldValidator"
+        type: "VAFieldValidator";
     }
 
     /**
@@ -1091,7 +1460,7 @@ declare namespace global {
         // TODO: Add members for global.ValidateSchedule
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=ecae190bbf1211003f07e2c1ac0739fb
 
-        type: "ValidateSchedule"
+        type: "ValidateSchedule";
     }
 
     /**
@@ -1104,7 +1473,7 @@ declare namespace global {
         // TODO: Add members for global.VariableQueryParser
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=dadc4af05fa023008e6b1f9f2f731340
 
-        type: "VariableQueryParser"
+        type: "VariableQueryParser";
     }
 
     /**
@@ -1116,7 +1485,7 @@ declare namespace global {
         // TODO: Add members for global.VariableUtil
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=15f2285773011300f49d0690fdf6a721
 
-        type: "VariableUtil"
+        type: "VariableUtil";
     }
 
     /**
@@ -1128,7 +1497,7 @@ declare namespace global {
     export class WalkWorkflow {
         // TODO: Add members for global.WalkWorkflow
 
-        type: "WalkWorkflow"
+        type: "WalkWorkflow";
     }
 
     /**
@@ -1140,7 +1509,7 @@ declare namespace global {
     export class WFActivityHandler {
         // TODO: Add members for global.WFActivityHandler
 
-        type: "WFActivityHandler"
+        type: "WFActivityHandler";
     }
 
     /**
@@ -1152,7 +1521,7 @@ declare namespace global {
     export class WindowsOSNameHelper {
         // TODO: Add members for global.WindowsOSNameHelper
 
-        type: "WindowsOSNameHelper"
+        type: "WindowsOSNameHelper";
     }
 
     /**
@@ -1165,7 +1534,7 @@ declare namespace global {
     export class WorkflowDuration {
         // TODO: Add members for global.WorkflowDuration
 
-        type: "WorkflowDuration"
+        type: "WorkflowDuration";
     }
 
     /**
@@ -1178,7 +1547,7 @@ declare namespace global {
     export class WorkflowModelManager {
         // TODO: Add members for global.WorkflowModelManager
 
-        type: "WorkflowModelManager"
+        type: "WorkflowModelManager";
     }
 
     /**
@@ -1190,7 +1559,7 @@ declare namespace global {
     export class WorkflowModelManagerAjax extends AbstractAjaxProcessor {
         // TODO: Add members for global.WorkflowModelManagerAjax
 
-        type: "WorkflowModelManagerAjax"
+        type: "WorkflowModelManagerAjax";
     }
 
     /**
@@ -1202,7 +1571,7 @@ declare namespace global {
     export class WorkflowScheduler {
         // TODO: Add members for global.WorkflowScheduler
 
-        type: "WorkflowScheduler"
+        type: "WorkflowScheduler";
     }
 
     /**
@@ -1214,6 +1583,6 @@ declare namespace global {
     export class WorkflowTimeline {
         // TODO: Add members for global.WorkflowTimeline
 
-        type: "WorkflowTimeline"
+        type: "WorkflowTimeline";
     }
 }
