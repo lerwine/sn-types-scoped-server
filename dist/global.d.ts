@@ -126,6 +126,82 @@ declare namespace global {
     }
     
     /**
+     * Provides scoped methods to create JSON objects from a string, and to turn JSON objects into strings.
+     * @export
+     * @class JSON
+     * @see {@link https://docs.servicenow.com/bundle/rome-application-development/page/app-store/dev_portal/API_reference/JSON/concept/c_JSONAPI.html}
+     */
+    export class JSON {
+        /**
+         * Creates an object or primitive type from a JSON formatted string.
+         * @static
+         * @param {$$rhino.String} str - A JSON formatted string.
+         * @param {(this: any, key: string, value: any) => any} [reviver] - A function that transforms the results. This function is called for each member of the object.
+         * If a member contains nested objects, the nested objects are transformed before the parent object is.
+         * @return {*} An object created from the specified string.
+         * @description Proxies calls to the ES5 JSON object, named NativeJSON in the global scope.
+         * @memberof JSON
+         */
+        static parse(str: $$rhino.String, reviver?: (this: any, key: string, value: any) => any): any;
+
+        /**
+         * Creates a string from a JSON object.
+         * @static
+         * @param {*} jsonObject - JSON object to turn into a string.
+         * @param {(this: any, key: string, value: any) => any} [replacer] - A function that transforms the results.
+         * @param {(string | number)} [space] - Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
+         * @return {string} A JSON formatted string.
+         * @description Proxies calls to the ES5 JSON object, named NativeJSON in the global scope.
+         * Converts a value to JSON notation using the following guidelines:
+         * 
+         * If the value has a toJSON() method, it is responsible for defining the data that is serialized.
+         * 
+         * Boolean, number, and string objects are converted to the corresponding primitive values during stringification; in accordance with the traditional conversion semantics.
+         * 
+         * If a function, undefined, or a symbol is encountered during conversion, it is either omitted (when it is found in an object) or censored to null (when it is found in an array). JSON.stringify() also returns undefined when passing in "pure" values, such as JSON.stringify(function(){}) or JSON.stringify(undefined).
+         * 
+         * All symbol-keyed properties are ignored, even when using a replacer() function.
+         * 
+         * Instances of Date implement the toJSON() function by returning a string (the same as date.toISOString()), thus they are treated as strings.
+         * 
+         * The numbers Infinity and NaN, as well as the value null, are all considered null.
+         * 
+         * For all other object instances, only their enumerable properties are serialized.
+         * @memberof JSON
+         */
+        static stringify(jsonObject: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
+        
+        /**
+         * Creates a string from a JSON object.
+         * @static
+         * @param {*} jsonObject - JSON object to turn into a string.
+         * @param {((number | string)[] | null)} [replacer] - An array of strings and numbers that acts as an approved list for selecting the object properties that will be stringified.
+         * @param {(string | number)} [space] - Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
+         * @return {string} A JSON formatted string.
+         * @description Proxies calls to the ES5 JSON object, named NativeJSON in the global scope.
+         * Converts a value to JSON notation using the following guidelines:
+         * 
+         * If the value has a toJSON() method, it is responsible for defining the data that is serialized.
+         * 
+         * Boolean, number, and string objects are converted to the corresponding primitive values during stringification; in accordance with the traditional conversion semantics.
+         * 
+         * If a function, undefined, or a symbol is encountered during conversion, it is either omitted (when it is found in an object) or censored to null (when it is found in an array). JSON.stringify() also returns undefined when passing in "pure" values, such as JSON.stringify(function(){}) or JSON.stringify(undefined).
+         * 
+         * All symbol-keyed properties are ignored, even when using a replacer() function.
+         * 
+         * Instances of Date implement the toJSON() function by returning a string (the same as date.toISOString()), thus they are treated as strings.
+         * 
+         * The numbers Infinity and NaN, as well as the value null, are all considered null.
+         * 
+         * For all other object instances, only their enumerable properties are serialized.
+         * @memberof JSON
+         */
+        static stringify(jsonObject: any, replacer?: (number | string)[] | null, space?: string | number): string;
+
+        type: "JSON";
+    }
+
+    /**
      * JavaScript utility functions.
      * @export
      * @class JSUtil
