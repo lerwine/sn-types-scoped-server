@@ -2652,6 +2652,8 @@ declare class GlideScriptedProcessor implements Packages.com.glide.script.fencin
     toString(): $$rhino.String;
 }
 
+declare const g_processor: GlideScriptedProcessor;
+
 /**
  * The GlideServletRequest API is used in processor scripts.
  * @class GlideServletRequest
@@ -2673,6 +2675,8 @@ declare class GlideServletRequest implements Packages.com.glide.script.fencing.S
     toString(): $$rhino.String;
 }
 
+declare const g_request: GlideServletRequest;
+
 /**
  * The ScopedGlideServletResponse API is used in processor scripts.
  * @class GlideServletResponse
@@ -2688,6 +2692,8 @@ declare class GlideServletResponse implements Packages.com.glide.script.fencing.
     hashCode(): $$rhino.Number;
     toString(): $$rhino.String;
 }
+
+declare const g_response: GlideServletResponse;
 
 /**
  * Scoped TemplatePrinter handles printing from a mail script to the email message.
