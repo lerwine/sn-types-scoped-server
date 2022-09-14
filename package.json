@@ -1,0 +1,24 @@
+{
+  "name": "sn-types-scoped-server",
+  "version": "1.0.0",
+  "description": "Server-side JavaScript types for scoped apps.",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lerwine/sn-types-scoped-server.git"
+  },
+  "keywords": [
+    "ServiceNow",
+    "Scoped",
+    "Server"
+  ],
+  "author": "Leonard T. Erwine",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/lerwine/sn-types-scoped-server/issues"
+  },
+  "homepage": "https://github.com/lerwine/sn-types-scoped-server#readme"
+}
