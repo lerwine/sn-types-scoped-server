@@ -1,6 +1,6 @@
 {
   "name": "sn-types-scoped-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Server-side JavaScript types for scoped apps.",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/lerwine/sn-types-scoped-server/issues"
   },
-  "homepage": "https://github.com/lerwine/sn-types-scoped-server#readme"
+  "homepage": "https://github.com/lerwine/sn-types-scoped-server#readme",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
 }
