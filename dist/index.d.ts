@@ -1,4 +1,5 @@
 /// <reference path="$$rhino.d.ts" />
+/// <reference path="$$class.d.ts" />
 /// <reference path="Packages.d.ts" />
 /// <reference path="sn_kmf_ns.d.ts" />
 /// <reference path="sn_sc.d.ts" />
