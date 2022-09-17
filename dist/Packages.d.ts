@@ -20,7 +20,7 @@ declare namespace Packages {
     export namespace java {
         export namespace io {
             /**
-             * Represents the "InputStream" class 
+             * Represents the "InputStream" class.
              * @export
              * @interface InputStream
              * @extends {java.lang.Object}
@@ -112,7 +112,7 @@ declare namespace Packages {
                  */
                 toString(): $$rhino.String;
             }
-            
+
             /**
              * Allows an object to be the target of the "for-each loop" statement.
              * @export
@@ -127,7 +127,7 @@ declare namespace Packages {
                  */
                 iterator(): util.Iterator<T>;
             }
-            
+
             /**
              * Represents a java.lang.Character class or the primitive java char type.
              * @export
@@ -2418,7 +2418,7 @@ declare namespace Packages {
                  */
                 size(): $$rhino.Number;
             }
-            
+
             /**
              * Represents the java.util.Date class.
              * @export
@@ -2468,7 +2468,7 @@ declare namespace Packages {
                 setTime(time: $$rhino.Number): void;
 
             }
-            
+
             /**
              * Represents the java.util.TimeZone class.
              * @export
@@ -2833,7 +2833,7 @@ declare namespace Packages {
                      */
                     setTextContent(textContent: $$rhino.String): void;
                 }
-                
+
                 /**
                  * Represents an attribute in an {@link Element} object.
                  * @export
@@ -3726,7 +3726,7 @@ declare namespace Packages {
             }
         }
     }
-    
+
     export namespace com {
         export namespace glide {
             export namespace app_store {
@@ -4034,7 +4034,7 @@ declare namespace Packages {
                      */
                     export interface EmailJavascriptProxy extends script.fencing.ScopedScriptableObject {
                     }
-                    
+
                     /**
                      * Represents the "com.glide.email.service.EmailServiceSendConfigJavascriptProxy" Java class.
                      * @export
@@ -4731,7 +4731,7 @@ declare namespace Packages {
                 }
 
                 /**
-                 * Represents the "GlideScriptableObject" java class 
+                 * Represents the "GlideScriptableObject" java class.
                  * @export
                  * @interface GlideScriptableObject
                  * @description Library: commons-glide-16.6.0.3.jar;
@@ -4917,7 +4917,7 @@ declare namespace Packages {
                      */
                     export interface ScopedElementDescriptor extends java.lang.Object {
                     }
-                    
+
                     /**
                      * Represents the "com.glide.script.fencing.ScopedGlideAggregate" Java class.
                      * @export
@@ -5128,7 +5128,7 @@ declare namespace Packages {
                      */
                     export interface ScopedGlideServletResponse extends java.lang.Object {
                     }
-                    
+
                     /**
                      * Represents the "com.glide.script.fencing.ScopedGlideSession" Java class.
                      * @export
@@ -5203,7 +5203,7 @@ declare namespace Packages {
                      */
                     export interface ScopedHTTPHeader extends java.lang.Object {
                     }
-                    
+
                     /**
                      * Represents the "com.glide.script.fencing.ScopedQueryCondition" Java class.
                      * @export
@@ -5279,7 +5279,7 @@ declare namespace Packages {
                      */
                     export interface ScopedTransformLog extends java.lang.Object {
                     }
-                    
+
                     /**
                      * Represents the "com.glide.script.fencing.ScopedUser" Java class.
                      * @export
@@ -5495,7 +5495,7 @@ declare namespace Packages {
                      * Java declaration: 'public class GlideElementConditions extends GlideElement implements IQueryConstants'.
                      */
                      export interface GlideElementConditions extends GlideElement { }
-                    
+
                     /**
                      * Represents the "Counter" element type ("com.glide.script.glide_elements.GlideElementCounter" Java class).
                      * @export
@@ -6500,7 +6500,7 @@ declare namespace Packages {
                  * Java declaration: 'public class GlideElementDataArray extends com.glide.script.GlideElement'.
                  */
                 export interface GlideElementDataArray extends com.glide.script.GlideElement { }
-                
+
                 /**
                  * Represents the "Data Object" element type ("com.snc.datastructure.GlideElementDataObject" Java class).
                  * @export
@@ -6512,7 +6512,7 @@ declare namespace Packages {
                  * Java declaration: 'public class GlideElementDataObject extends com.glide.script.GlideElement'.
                  */
                  export interface GlideElementDataObject extends com.glide.script.GlideElement { }
-                
+
                 /**
                  * Represents the "Data Structure" element type ("com.snc.datastructure.GlideElementDataStructure" Java class).
                  * @export

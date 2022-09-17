@@ -23,14 +23,14 @@ export namespace sn_schedule_pages {
         // https://dev109722.service-now.com/nav_to.do?uri=sys_script_include.do?sys_id=7a9cb8150b033200ff6707a7b6673a6c
 
         constructor();
-        
+
         getSchedulePageByScheduleId(scheduleSysId: any): any;
         // {
         //     if (scheduleSysId) {
         //         var gr = new GlideRecord(this.TABLE_CMN_SCHEDULE);
         //         if (gr.get(scheduleSysId)) {
         //             var scheduleType = gr.getValue(this.ATTR_TYPE);
-    
+
         //             var pageGr = new GlideRecord(this.TABLE_CMN_SCHEDULE_PAGE);
         //             pageGr.addQuery(this.ATTR_TYPE, scheduleType);
         //             pageGr.query();
@@ -39,7 +39,7 @@ export namespace sn_schedule_pages {
         //         }
         //     }
         // },
-    
+
         getSchedulePageById(schedulePageSysId: any): any;
         // {
         //     var dataSourceClass;
@@ -63,10 +63,10 @@ export namespace sn_schedule_pages {
         //             return schedulePage;
         //         }
         //     }
-    
+
         //     return null;
         // },
-    
+
         getObjInstance(dataSourceClassName: any, _context: any): any;
         // {
         //     if (!_context)
@@ -80,12 +80,12 @@ export namespace sn_schedule_pages {
         //         return new _context[dataSourceClassName] ();
         //     }
         // },
-    
+
         getSchedulePageDetails(scheduleSysId: any): any;
         // {
         //     var schedulePage = this.getSchedulePageByScheduleId(scheduleSysId);
         //     var response = {};
-    
+
         //     if (!schedulePage) {
         //         response.redirect_url = '$show_schedule.do';
         //         response.append_params = true;
@@ -102,7 +102,7 @@ export namespace sn_schedule_pages {
         //     }
         //     return response;
         // },
-    
+
         getSchedulePageInfo(schedulePageObj: any): any;
         // {
         //     var info = {
@@ -117,7 +117,7 @@ export namespace sn_schedule_pages {
         //         info.meta = meta;
         //     return info;
         // },
-    
+
         getSystemFirstDayOfWeek(): any;
         // {
         //     var firstDayOfWeekProperty = parseInt(gs.getProperty('glide.ui.date_format.first_day_of_week', 1), 10);
@@ -125,7 +125,7 @@ export namespace sn_schedule_pages {
         //     (firstDayOfWeekProperty > 0 && firstDayOfWeekProperty <= 7);
         //     return isValid ? firstDayOfWeekProperty : 1;
         // },
-    
+
         getUserTimeFormat(format: any): any;
         // {
         //     var userTimeFormat = gs.getTimeFormat() + "";
@@ -134,14 +134,14 @@ export namespace sn_schedule_pages {
         //         userTimeFormat = userTimeFormat.replace(this.FORMAT[format].TIME_FORMAT[timeFormat], timeFormat);
         //     return userTimeFormat;
         // },
-    
+
         getClassName(schedulePageSysId: any): any;
         // {
         //     var className = '';
-    
+
         //     if (schedulePageSysId == this.DEFAULT_SCHEDULE_SYSID)
         //         className = this.DEFAULT_SCHEDULE_DATA_SOURCE;
-    
+
         //     return className;
         // }
 

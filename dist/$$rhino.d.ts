@@ -23,7 +23,7 @@ declare namespace $$rhino {
      * @typedef {(string | Packages.java.lang.String)} String
      */
     export type String = string | Packages.java.lang.String;
-    
+
     /**
      * Utility type for a javascript string or a Java string-like types.
      * @typedef {(String | Packages.java.lang.CharSequence | Packages.java.lang.Character)} StringLike

@@ -7,7 +7,7 @@
  * Query operator values that can be used for string value comparisons.
  * @typedef {("=" | "!=" | "IN" | "NOT IN" | "STARTSWITH" | "ENDSWITH" | "CONTAINS" | "DOES NOT CONTAIN" | "INSTANCEOF")}
  */
- declare type StringQueryOperator = "=" | "!=" | "IN" | "NOT IN" | "STARTSWITH" | "ENDSWITH" | "CONTAINS" | "DOES NOT CONTAIN" | "INSTANCEOF";
+declare type StringQueryOperator = "=" | "!=" | "IN" | "NOT IN" | "STARTSWITH" | "ENDSWITH" | "CONTAINS" | "DOES NOT CONTAIN" | "INSTANCEOF";
 
 /**
  * Query operator values that can be used for numerical operations.
@@ -27,7 +27,7 @@ declare type QueryOperator = StringQueryOperator | NumberQueryOperator;
  */
 declare type service_availabilityType = "daily" | "weekly" | "monthly" | "annually" | "last7days" | "last30days" | "last12months";
 
-export type AggregateType = "min" | "max" | "sum" | "avg" | "count";
+declare type AggregateType = "min" | "max" | "sum" | "avg" | "count";
 
 declare namespace global {
     /**
@@ -46,7 +46,7 @@ declare namespace global {
          * @memberof ArrayUtil
          */
         concat<T>(parent: T[], child: T[]): T[];
-        
+
         /**
          * Searches the array for the specified element.
          * @template T - The element type,
@@ -56,7 +56,7 @@ declare namespace global {
          * @memberof ArrayUtil
          */
         contains<T>(array: T[], element: T): boolean;
-        
+
         /**
          * Converts a Java object to an array.
          * @param {*} a - Object to convert.
@@ -74,7 +74,7 @@ declare namespace global {
          * @memberof ArrayUtil
          */
         diff<T>(a: T[], b: T[], ...c: T[]): T[];
-        
+
         /**
          * Returns an array from the specified object.
          * @param {*} obj - Object from which to create an array.
@@ -82,7 +82,7 @@ declare namespace global {
          * @memberof ArrayUtil
          */
         ensureArray(object: any): any[];
-        
+
         /**
          * Searches the array for the element.
          * @template T - The element type.
@@ -93,7 +93,7 @@ declare namespace global {
          * @memberof ArrayUtil
          */
         indexOf<T>(array: T, element: T, startIndex?: number): number;
-        
+
         /**
          * Finds the elements present in all arrays.
          * @template T - The element type.
@@ -114,7 +114,7 @@ declare namespace global {
          * @memberof ArrayUtil
          */
         union<T>(a: T[], b: T[], ...c: T[]): T[];
-        
+
         /**
          * Removes duplicate items from an array.
          * @template T - The element type.
@@ -124,7 +124,7 @@ declare namespace global {
          */
         unique<T>(a: T[]): T[];
     }
-    
+
     /**
      * Provides scoped methods to create JSON objects from a string, and to turn JSON objects into strings.
      * @export
@@ -153,24 +153,24 @@ declare namespace global {
          * @return {string} A JSON formatted string.
          * @description Proxies calls to the ES5 JSON object, named NativeJSON in the global scope.
          * Converts a value to JSON notation using the following guidelines:
-         * 
+         *
          * If the value has a toJSON() method, it is responsible for defining the data that is serialized.
-         * 
+         *
          * Boolean, number, and string objects are converted to the corresponding primitive values during stringification; in accordance with the traditional conversion semantics.
-         * 
+         *
          * If a function, undefined, or a symbol is encountered during conversion, it is either omitted (when it is found in an object) or censored to null (when it is found in an array). JSON.stringify() also returns undefined when passing in "pure" values, such as JSON.stringify(function(){}) or JSON.stringify(undefined).
-         * 
+         *
          * All symbol-keyed properties are ignored, even when using a replacer() function.
-         * 
+         *
          * Instances of Date implement the toJSON() function by returning a string (the same as date.toISOString()), thus they are treated as strings.
-         * 
+         *
          * The numbers Infinity and NaN, as well as the value null, are all considered null.
-         * 
+         *
          * For all other object instances, only their enumerable properties are serialized.
          * @memberof JSON
          */
         static stringify(jsonObject: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
-        
+
         /**
          * Creates a string from a JSON object.
          * @static
@@ -180,19 +180,19 @@ declare namespace global {
          * @return {string} A JSON formatted string.
          * @description Proxies calls to the ES5 JSON object, named NativeJSON in the global scope.
          * Converts a value to JSON notation using the following guidelines:
-         * 
+         *
          * If the value has a toJSON() method, it is responsible for defining the data that is serialized.
-         * 
+         *
          * Boolean, number, and string objects are converted to the corresponding primitive values during stringification; in accordance with the traditional conversion semantics.
-         * 
+         *
          * If a function, undefined, or a symbol is encountered during conversion, it is either omitted (when it is found in an object) or censored to null (when it is found in an array). JSON.stringify() also returns undefined when passing in "pure" values, such as JSON.stringify(function(){}) or JSON.stringify(undefined).
-         * 
+         *
          * All symbol-keyed properties are ignored, even when using a replacer() function.
-         * 
+         *
          * Instances of Date implement the toJSON() function by returning a string (the same as date.toISOString()), thus they are treated as strings.
-         * 
+         *
          * The numbers Infinity and NaN, as well as the value null, are all considered null.
-         * 
+         *
          * For all other object instances, only their enumerable properties are serialized.
          * @memberof JSON
          */
@@ -214,13 +214,13 @@ declare namespace global {
         static union(...maps: { [key: string]: any }[]): { [key: string]: any };
 
         /**
-        * Removes entries from the given map.  The second argument defines what will be removed.  If it 
-        * is an array, it is treated as an array of names to remove.  If it is an object, the names of
-        * its properties are the names to remove.  Otherwise, it is coerced to a string as the name of
+        * Removes entries from the given map. The second argument defines what will be removed. If it
+        * is an array, it is treated as an array of names to remove. If it is an object, the names of
+        * its properties are the names to remove. Otherwise, it is coerced to a string as the name of
         * the single item to remove.
         */
         static removeFromMap(map: { [key: string]: any }, names: any): void;
-        
+
         /*
         *  Returns true if item is defined but has no properties or functions. (handy for associative arrays)
         */
@@ -252,10 +252,10 @@ declare namespace global {
         static getGlobal(): any;
 
         /*
-        * Returns true if the given item is a member of the given class.  For JavaScript objects, this method behaves exactly
-        * like the JavaScript operator "instanceof".  However, this method (unlike the JavaScript operator) also tests Java
+        * Returns true if the given item is a member of the given class. For JavaScript objects, this method behaves exactly
+        * like the JavaScript operator "instanceof". However, this method (unlike the JavaScript operator) also tests Java
         * objects.
-        * 
+        *
         * item: the object to be tested.
         * klass: the class to be tested (for Java objects, must be the complete class name, like "java.util.ArrayList").
         */
@@ -269,20 +269,20 @@ declare namespace global {
         *   'boolean'  if the given value is a primitive boolean or a Boolean wrapper instance
         *   'function' if the given value is a function
         *   'object'   otherwise (including if it is a Java object)
-        * 
-        * See also: typeOf() which returns these or for Objects implented with 'type:' (such as 
+        *
+        * See also: typeOf() which returns these or for Objects implented with 'type:' (such as
         *           Script Includes that use our default boilerplate), this returns that type
-        *           which is intended to be the Javascript 'className' of the object.  
+        *           which is intended to be the Javascript 'className' of the object.
         */
         static type_of(value: any): string;
 
 
         /**
-        * Returns the type of the given value.  
-        * 
+        * Returns the type of the given value.
+        *
         * If 'x' is JavaObject, then this is the class name,
         *
-        * If 'x' is a JavaScript object from a JS Class (like our Script Include boilerplate) 
+        * If 'x' is a JavaScript object from a JS Class (like our Script Include boilerplate)
         * then this is the value of the 'type' property which is meant to be the JavaScript
         * class name,
         *
@@ -290,7 +290,7 @@ declare namespace global {
         *
         * If 'x' is a JavaScript Date, this returns 'date'
         *
-        * Otherwise this returns the JavaScript type: string, number, boolean or object as per 
+        * Otherwise this returns the JavaScript type: string, number, boolean or object as per
         * the type_of method (above).
         *
         * See Also: type_of
@@ -303,8 +303,8 @@ declare namespace global {
         static isJavaObject(value: any): boolean;
 
         /*
-        * Coerces the given item to a boolean.  If the given item is a boolean, it is passed through.  Non-zero numbers return true.  Null or
-        * undefined returns false.  Strings return true only if exactly equal to 'true'.  
+        * Coerces the given item to a boolean. If the given item is a boolean, it is passed through. Non-zero numbers return true. Null or
+        * undefined returns false. Strings return true only if exactly equal to 'true'.
         */
         static toBoolean(item: any): boolean;
 
@@ -323,28 +323,28 @@ declare namespace global {
         static contains(container: any, value: any, compareByIdentity?: boolean): boolean;
 
         /*
-        * Returns true if the two given values are equivalent, and optionally logs any differences.  The two
-        * values may be any value - JavaScript primitives or objects.  Objects of classes Object, Array, Date,
-        * String, Boolean, and Number are all compared correctly and (as necessary) recursively.  Note that 
+        * Returns true if the two given values are equivalent, and optionally logs any differences. The two
+        * values may be any value - JavaScript primitives or objects. Objects of classes Object, Array, Date,
+        * String, Boolean, and Number are all compared correctly and (as necessary) recursively. Note that
         * comparand types much match exactly - for the purposes of this comparison, 'abc' does NOT match
-        * new String('abc').  If differences are logged, they may be retrieved from JSUtil.areEqualLog.
+        * new String('abc'). If differences are logged, they may be retrieved from JSUtil.areEqualLog.
         */
         static areEqual(val1: any, val2: any, logDiff?: boolean): boolean;
 
         /*
-        * Logs all the properties (recursively) in the given object: name, type, and value.  The optional second parameter is a name for the logged object.
+        * Logs all the properties (recursively) in the given object: name, type, and value. The optional second parameter is a name for the logged object.
         */
         static logObject(obj: any, name: string): void;
 
         /*
-        * Returns a string that recursively describes all the properties in the given object: name, type, and value.  
+        * Returns a string that recursively describes all the properties in the given object: name, type, and value.
         * The optional second parameter is a name for the logged object.
         */
         static describeObject(obj: any, name?: string): string;
 
         /*
         * NOTE: between this banner and the following banner, several string literals are specified in an odd way: by the contatenation of a single
-        *       character ('&') and the remainder of the HTML entity (such as 'amp;').  This method was employed to avoid having the entities translated 
+        *       character ('&') and the remainder of the HTML entity (such as 'amp;'). This method was employed to avoid having the entities translated
         *       into the equivalent characters when the script include is edited in the instance.
         */
         static readonly AMP: RegExp;
@@ -365,8 +365,8 @@ declare namespace global {
         static unescapeAttr(attr: string): string;
 
         /** Render an expanded/evaluted string from a string that may contain one
-        *  or more Javascript expressions, each wrapped in a dolloar-braces 
-        *  delimiter pattern. 
+        *  or more Javascript expressions, each wrapped in a dolloar-braces
+        *  delimiter pattern.
         *
         *     'The timeis:${newGlideDateTime()}'
         *
@@ -376,18 +376,18 @@ declare namespace global {
         *  certain global variables might be usable such as 'current' or 'workflow':
         *
         *      'WF State:${context.state},rec:${current.sys_id}'
-        *  
+        *
         *  and content can be substituted into data from various Javascripts:
         *
         *      <CREATED>${newGlideDateTime()}</CREATED>
-        * 
-        *  WARNING: This is used heavily by workflows.  If this is changed, then 
+        *
+        *  WARNING: This is used heavily by workflows. If this is changed, then
         *           be sure to run all workflow tests. Test Log Message activity
         *           with ${workflow.variables.somevariable} and similar usages.
         */
         static strEval(str: string): string;
     }
-    
+
     /**
      * Base ajax processor class that other ajax processors extend
      * @export
@@ -397,7 +397,7 @@ declare namespace global {
         readonly CALLABLE_PREFIX: 'ajaxFunction_';
 
         // prototype: AbstractAjaxProcessor;
-    
+
         initialize(request?: GlideServletRequest, responseXML?: XMLDocument2, gc?: Packages.com.glide.script.GlideController): void;
 
         process(): any;
@@ -422,14 +422,14 @@ declare namespace global {
          * @memberof AbstractAjaxProcessor
          */
         getName(): $$rhino.String;
-    
+
         /**
          * Returns value of "sysparm_value" as a Java String instance
          * @return {$$rhino.String}
          * @memberof AbstractAjaxProcessor
          */
         getValue(): $$rhino.String;
-        
+
         /**
          * Returns value of "sysparm_type" as a Java String instance
          * @return {$$rhino.String}
@@ -438,9 +438,9 @@ declare namespace global {
         getType(): $$rhino.String;
 
         getChars(): $$rhino.String;
-        
+
         setAnswer(value: any): void;
-        
+
         setError(error: any): void;
     }
 
@@ -451,39 +451,39 @@ declare namespace global {
      */
     export class AttachmentUtils {
         attInptStream: GlideScriptableInputStream;
-        
+
         /**
          * Creates an instance of AttachmentUtils.
          * @param {$$rhino.String} attachmentSysId - Attachment sys_id.
          * @memberof AttachmentUtils
          */
         constructor(attachmentSysId: $$rhino.String);
-        
+
         /**
          * Gets MD5 checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
          * @return {$$rhino.String} MD5 checksum string.
          * @memberof AttachmentUtils
          */
         getMD5ChecksumFromAttachment(): $$rhino.String;
-    
+
         /**
          * Gets SHA1 checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
          * @return {$$rhino.String} SHA1 checksum string
          */
         getSHA1ChecksumFromAttachment(): $$rhino.String;
-        
+
         /**
          * Gets SHA256 checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
          * @return {$$rhino.String} SHA256 checksum string
          */
         getSHA256ChecksumFromAttachment(): $$rhino.String;
-        
+
         /**
          * Gets MD5 Hex checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
          * @return {$$rhino.String} MD5 Hex checksum string
          */
         getMD5HexChecksumFromAttachment(): $$rhino.String;
-    
+
         /**
          * Gets SHA1 Hex checksum for the attachment identified by the attachmentSysId parameter in the class initialization.
          * @return {$$rhino.String} SHA1 Hex checksum string
@@ -542,7 +542,7 @@ declare namespace global {
     export class CalendarUtils {
         static readonly UTC_DATE_FORMAT = "yyyy-MM-dd";
         static readonly UTC_TIME_FORMAT = "HH:mm:ss";
-    
+
         log: GSLog;
 
         /**
@@ -550,7 +550,7 @@ declare namespace global {
          * @memberof CalendarUtils
          */
         constructor();
-    
+
         /**
          * Get date format from user defined format or system format if not found, but converted to DHTMLX format as per spec:
          * {@link http://docs.dhtmlx.com/scheduler/settings_format.html}
@@ -558,7 +558,7 @@ declare namespace global {
          * @memberof CalendarUtils
          */
         getUserDateFormat(): string;
-    
+
         /**
          * Get time format from user defined format or system format if not found, but converted to DHTMLX format as per spec:
          * {@link http://docs.dhtmlx.com/scheduler/settings_format.html}
@@ -577,7 +577,7 @@ declare namespace global {
      */
     export class ContentTypeValidator {
         defaultSupportedContentTypes: "image/svg+xml";
-	
+
 	    constructor();
 
         isValidType(attachment: GlideRecord, userDefinedSupportedContentTypes?: string[]): boolean;
@@ -596,7 +596,7 @@ declare namespace global {
      */
     export class EncryptionCommons {
         constructor();
-        
+
         /**
          * Lists all fields that can be encrypted for a given table.
          * @param {string} tableName - The name of the table.
@@ -605,9 +605,9 @@ declare namespace global {
          * @memberof EncryptionCommons
          */
         getEncryptableFieldsForTable(tableName: string, additionalValidator?: { (ed: GlideElementDescriptor, fieldName: $$rhino.String, ec: EncryptionCommons): boolean }): $$rhino.String[];
-        
+
         addToArrayTablesWithBooleanAttributeSetToTrue(array: $$rhino.String[], attributeName: $$rhino.String): $$rhino.String[];
-    
+
         /**
          * Tests whether table is marked for auditing.
          * @param {string} tableName - The name of the table.
@@ -615,7 +615,7 @@ declare namespace global {
          * @memberof EncryptionCommons
          */
         isTableAudited(tableName: string): boolean;
-    
+
         getUsableCryptoModules(): $$rhino.String[];
 
         type: "EncryptionCommons";
@@ -753,7 +753,7 @@ declare namespace global {
          * @memberof GlideQuery
          */
         getBy(keyValues: { [key: string]: any; }, selectedFields?: $$rhino.String[]): Optional<{ [key: string]: $$rhino.String; }>;
-        
+
         /**
          * Groups the query results by a designated field or fields.
          * @param {($$rhino.String | $$rhino.String[])} fields - Field or fields to group the results by.
@@ -1020,7 +1020,7 @@ declare namespace global {
 
     /**
      * Make logging and debugging from Script easier by implementing levels of log output, selectable by per-caller identified sys_properties values.
-     * This implements both Log4j style logging and BSD Syslog style logging.  As default, the logger will use BSD style logging.
+     * This implements both Log4j style logging and BSD Syslog style logging. As default, the logger will use BSD style logging.
      * PLEASE CHOOSE ONE AND STICK TO IT (within a class anyhow)
      * @export
      * @class GSLog
@@ -1094,7 +1094,7 @@ declare namespace global {
     }
 
     /**
-     * Called by processor to create a generic hierarchy diagram.  May be extended to create new types of hierarchy diagrams.
+     * Called by processor to create a generic hierarchy diagram. May be extended to create new types of hierarchy diagrams.
      * @export
      * @class InheritedRoleMapProcessor
      */
@@ -1222,7 +1222,7 @@ declare namespace global {
          * @memberof Optional
          */
         static empty<U>(reason?: string): Optional<U>;
-        
+
         /**
          * Returns a new Optional object. Instead of containing the record,
          * the object contains a function to get the record that is only called if and when requested in the code.
@@ -1356,7 +1356,7 @@ declare namespace global {
         /**
          * Executes a reducer function on each item in the stream, resulting in single output value.
          * @template U - The accumulated value type.
-         * @param {{ (acc: U, cur: T): U }} reducerFn - Function to apply to each item in the stream that reduces the stream to a single value. 
+         * @param {{ (acc: U, cur: T): U }} reducerFn - Function to apply to each item in the stream that reduces the stream to a single value.
          * @param {U} initialValue - Value passed to the function as the initial value.
          * @return {U} Accumulated total of all items returned by the reducer function.
          * @memberof Stream

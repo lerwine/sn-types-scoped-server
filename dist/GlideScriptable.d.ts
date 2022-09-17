@@ -80,11 +80,11 @@ declare class Action implements Packages.com.glide.script.fencing.ScopedAction {
      * @memberof Action
      */
     setURLParameter(parameterName: $$rhino.String, parameterValue: $$rhino.String): void;
-    
+
     toString(): $$rhino.String;
     equals(obj: object): $$rhino.Boolean;
     hashCode(): $$rhino.Number;
-    
+
 }
 
 /**
@@ -556,9 +556,9 @@ declare class GlideElement implements Packages.com.glide.script.fencing.ScopedGl
     // TODO: Implement getStages                from com.glide.stages.GlideElementWorkflow                                         under com.glide.script.fencing.ScopedGlideElement
 
     // TODO: Implement getVariablesValue        from com.glide.vars2.GlideElementVariables                                         under com.glide.script.fencing.ScopedGlideElement (category: catalog)
-    
+
     // TODO: Implement isMultiRow               from com.glide.vars2.GlideElementVariable                                          under com.glide.script.fencing.ScopedGlideElement (category: catalog)
-    
+
     // TODO: Implement addRow                   from com.glide.catalog.component.variables.models.table.api.ITableVariableNode     under com.glide.script.fencing.ScopedGlideElement (category: catalog)
     // TODO: Implement canCreate                from com.glide.catalog.component.variables.models.table.api.ITableVariableNode     under com.glide.script.fencing.ScopedGlideElement (category: catalog)
     // TODO: Implement canRead                  from com.glide.catalog.component.variables.models.table.api.ITableVariableNode     under com.glide.script.fencing.ScopedGlideElement (category: catalog)
@@ -602,7 +602,7 @@ declare class GlideElement implements Packages.com.glide.script.fencing.ScopedGl
      * @memberof IGlideElement
      */
     canWrite(): $$rhino.Boolean;
-    
+
     /**
      * Determines if the current field has been modified. This functionality is available for all available data types, except Journal fields.
      * @memberof GlideElement
@@ -729,7 +729,7 @@ declare class GlideElement implements Packages.com.glide.script.fencing.ScopedGl
      * @memberof IGlideElement
      */
     getReferenceTable(): $$rhino.String;
-    
+
     /**
      * 
      * @return {GlideRecord}
@@ -743,7 +743,7 @@ declare class GlideElement implements Packages.com.glide.script.fencing.ScopedGl
      * @returns {string} Field name.
      */
     getTableName(): string;
-    
+
     /**
      * 
      * @return {$$rhino.Boolean}
@@ -1053,7 +1053,7 @@ declare class GlideAggregate implements Packages.com.glide.script.fencing.Scoped
      * @memberof GlideAggregate
      */
     groupBy(name: $$rhino.String): void;
-    
+
     /**
      * Determines if there are any more records in the GlideAggregate object.
      * @return {$$rhino.Boolean} True if there are more results in the query set; otherwise, false.
@@ -1291,7 +1291,7 @@ declare class GlideDateTime implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDateTime
      */
     constructor();
-    
+
     /**
      * Creates an instance of GlideDateTime set to the time of the GlideDateTime object passed in the parameter.
      * @param {GlideDateTime} g - The GlideDateTime object to use for setting the time of the new object.
@@ -1319,6 +1319,7 @@ declare class GlideDateTime implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDateTime
      */
     add(milliseconds: $$rhino.Number): void;
+
     /**
      * 
      * Adds a specified number of days to the current GlideDateTime object.
@@ -1695,7 +1696,7 @@ declare class GlideDateTime implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDateTime
      */
     setDisplayValue(value: $$rhino.String, format: $$rhino.String): void;
-    
+
     /**
      * Sets a date and time value using the internal format (yyyy-MM-dd HH:mm:ss) and the current user's time zone.
      * @param {$$rhino.String} value - The date and time in internal format.
@@ -1880,7 +1881,7 @@ declare class GlideDate implements Packages.com.glide.script.fencing.ScopedGlide
      * @memberof GlideDate
      */
     getYearNoTZ(): $$rhino.Number;
-    
+
     /**
      * Sets a date value using the current user's display format and time zone.
      * @param {$$rhino.String} asDisplayed - 
@@ -1958,7 +1959,7 @@ declare class GlideDuration implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDuration
      */
     constructor();
-    
+
     /**
      * Creates an instance of GlideDuration.
      * @param {GlideDuration} another - GlideDuration object.
@@ -1997,7 +1998,7 @@ declare class GlideDuration implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDuration
      * @see {@link https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/time/reference/r_FormatDateAndTimeFields.html}
      */
-    getByFormat(format: $$rhino.String): $$rhino.String; 
+    getByFormat(format: $$rhino.String): $$rhino.String;
 
     /**
      * Returns the number of days.
@@ -2037,7 +2038,7 @@ declare class GlideDuration implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDuration
      */
     getValue(): $$rhino.String;
-    
+
     /**
      * Sets the duration display value.
      * @param {$$rhino.String} asDisplayed - Display duration value to set.
@@ -2055,7 +2056,7 @@ declare class GlideDuration implements Packages.com.glide.script.fencing.ScopedG
      * @memberof GlideDuration
      */
     setValue(o: any): void;
-    
+
     /**
      * Subtracts the duration of the specified GlideDuration object to the current GlideDuration object.
      * @param {GlideDuration} duration - GlideDuration object that contains the duration value to subtract from the current GlideDuration object.
@@ -2141,7 +2142,7 @@ declare class XMLDocument2 implements Packages.com.glide.script.fencing.ScopedXM
     // TODO: Implement toString                   from com.glide.script.XMLDocument2               under com.glide.script.fencing.ScopedXMLDocument2
     equals(obj: object): $$rhino.Boolean;
     hashCode(): $$rhino.Number;
-   
+
     toString(): $$rhino.String;
 }
 
@@ -2313,7 +2314,7 @@ declare class GlidePluginManager implements Packages.com.glide.script.fencing.Sc
  * GlideLocale provides information about display information for the local instance.
  * @class GlideLocale
  * @see {@link https://developer.servicenow.com/dev.do#!/reference/api/rome/server/no-namespace/c_GlideLocaleScopedAPI}
- * @todo Add members to GlideLocale 
+ * @todo Add members to GlideLocale
  */
 declare class GlideLocale implements Packages.com.glide.script.fencing.ScopedGlideLocale {
     // TODO: Implement getDecimalSeparator  from com.glide.script.fencing.ScopedGlideLocale under com.glide.script.fencing.ScopedGlideLocale
@@ -2897,7 +2898,7 @@ declare class GlideSysAttachment implements Packages.com.glide.script.fencing.Gl
      * @memberof GlideSysAttachment
      */
     constructor();
-    
+
     /**
      * Copies attachments from the source record to the target record.
      * @static
@@ -2909,7 +2910,7 @@ declare class GlideSysAttachment implements Packages.com.glide.script.fencing.Gl
      * @memberof GlideSysAttachment
      */
     static copy(sourceTable: $$rhino.String, sourceID: $$rhino.String, targetTable: $$rhino.String, targetID: $$rhino.String): Packages.java.util.ArrayList<$$rhino.String>;
-    
+
     /**
      * Copies attachments from the source record to the target record.
      * @param {$$rhino.String} sourceTable - Name of the table with the attachments to be copied.
@@ -3374,7 +3375,7 @@ declare class GlideDigest implements Packages.com.glide.script.fencing.GlideDige
      * @memberof GlideDigest
      */
     sha256_digest(toHash: $$rhino.String): $$rhino.String;
-    
+
     /**
      * Create a message digest from a string using the MD5 algorithm. The output string is in Base64.
      * @param {$$rhino.String} source - The source string.
@@ -3712,7 +3713,7 @@ declare class GlideDBFunctionBuilder implements Packages.com.glide.db.functions.
      * @memberof GlideDBFunctionBuilder
      */
     concat(): void;
-    
+
     /**
      * Defines a constant value to use in the function.
      * If used with the {@link #dayofweek} method, the string defines whether to use Sunday or Monday as the first day of the week.
@@ -3727,7 +3728,7 @@ declare class GlideDBFunctionBuilder implements Packages.com.glide.db.functions.
      * @memberof GlideDBFunctionBuilder
      */
     datediff(): void;
-    
+
     /**
      * Returns an integer representing the day of the week for a given date.
      * Use the {@link #field} method to define the given date/time. Use the {@link #constant} method to define whether the week starts on a Sunday or Monday.
@@ -3744,7 +3745,7 @@ declare class GlideDBFunctionBuilder implements Packages.com.glide.db.functions.
      * @memberof GlideDBFunctionBuilder
      */
     divide(): void;
-    
+
     /**
      * Defines a field on which a SQL operation is performed.
      * @param {$$rhino.String} field
@@ -3758,14 +3759,14 @@ declare class GlideDBFunctionBuilder implements Packages.com.glide.db.functions.
      * @memberof GlideDBFunctionBuilder
      */
     length(): void;
-    
+
     /**
      * Multiplies the values of two integer fields.
      * Use the {@link #field} method to define fields on which the operation is performed.
      * @memberof GlideDBFunctionBuilder
      */
     multiply(): void;
-    
+
     /**
      * Subtracts the value of one integer field from another.
      * Use the {@link #field} method to define fields on which the operation is performed.
@@ -3819,7 +3820,7 @@ declare class GlideStringUtil implements Packages.com.glide.util.ScopedStringUti
      * @memberof GlideStringUtil
      */
     static dotToUnderBar(sourceString: $$rhino.String): string;
-    
+
     /**
      * Removes quotes from a string.
      * @param {$$rhino.String} sourceString - The string to be processed.
@@ -3827,7 +3828,7 @@ declare class GlideStringUtil implements Packages.com.glide.util.ScopedStringUti
      * @memberof GlideStringUtil
      */
     static escapeAllQuotes(sourceString: $$rhino.String): string;
-    
+
     /**
      * Replaces problem characters with escape characters.
      * @param {$$rhino.String} sourceString - Text to process.

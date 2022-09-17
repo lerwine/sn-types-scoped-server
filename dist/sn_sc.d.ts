@@ -318,7 +318,7 @@ declare namespace sn_sc {
          */
         delivery_time: $$rhino.String;
     }
-    
+
     export interface IcheckOutCartResultFrequencyItem {
         subtotal_price: $$rhino.String;
         subtotal_recurring_frequency: $$rhino.String;
@@ -355,7 +355,7 @@ declare namespace sn_sc {
         monthly: IcheckOutCartResultFrequencyItem;
         yearly: IcheckOutCartResultFrequencyItem;
     }
-    
+
     export interface IorderNow2Step {
         /**
          * The sys_id of the current shopping cart.
@@ -439,7 +439,7 @@ declare namespace sn_sc {
          * @type {$$rhino.String}
          * @memberof IaddToCartResult
          */
-        localized_recurring_price: $$rhino.String; 
+        localized_recurring_price: $$rhino.String;
         /**
          * Item price.
          * @type {$$rhino.String}
@@ -501,7 +501,7 @@ declare namespace sn_sc {
          * @memberof CartJS
          */
         constructor(cartName?: $$rhino.String);
-        
+
         /**
          * Adds the request for a catalog item to the current cart.
          * @param {IItemOrderInfo} request - A JSON object that contains the details of the catalog item to be added to the cart.
@@ -530,14 +530,14 @@ declare namespace sn_sc {
          * @memberof CartJS
          */
         empty(): void;
-        
+
         /**
          * Returns the cart details.
          * @return {IgetCartDetailsResult} Object containing the current cart details.
          * @memberof CartJS
          */
         getCartDetails(): IgetCartDetailsResult;
-        
+
         /**
          * Sys_id for the current cart.
          * @return {$$rhino.String}
@@ -594,7 +594,7 @@ declare namespace sn_sc {
          * @memberof CartJS
          */
         setDeliveryAddress(address: $$rhino.String): void;
-        
+
         /**
          * Sets the sys_id in the sys_user record of the user for whom the cart is requested.
          * @param {$$rhino.String} user - sys_id to be set in the sys_user record of the user for whom the cart is requested.
@@ -627,7 +627,7 @@ declare namespace sn_sc {
          * @memberof CartJS
          */
         updateItem(request: IupdateItemInfo, cart_item_id: $$rhino.String): IupdateItemResult;
-        
+
         equals(obj: any): $$rhino.Boolean;
         hashCode(): $$rhino.Number;
         toString(): $$rhino.String;
