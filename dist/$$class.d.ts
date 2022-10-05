@@ -1,6 +1,10 @@
+/**
+ * Contains helper types for creating classes in the scoped server-side Rhino scripting environment.
+ * @namespace $$class
+ */
 declare namespace $$class {
     /**
-     * The class object type for compatibility with the Rhino scripting environment.
+     * The class object type, defined for compatibility with the Rhino scripting environment.
      * @export
      * @interface Class
      */
@@ -48,7 +52,7 @@ declare namespace $$class {
     export interface JSProto { }
 
     /**
-     * Defines the class constructor for the Rhino scripting environment.
+     * Defines the constructor object for custom classes in the Rhino scripting environment.
      * @export
      * @interface ClassConstructor
      */
@@ -85,17 +89,21 @@ declare namespace $$class {
  */
 interface ObjectConstructor {
     /**
-     * Creates a prototype which extends the prototype of a base class.
+     * Creates a class constructor which extends the a base class.
      * @template B - The base class type.
-     * @template TInstance - Type type of the instance.
-     * @template TPrototype - Type type of prototype.
-     * @param {B} base - The base prototype object.
-     * @param {(TPrototype & ThisType<$$class.PickProperty<B, 'prototype'> & TInstance>)} derived - A prototype which extends the prototype of the provided base class.
-     * @return {($$class.PickProperty<B, 'prototype'> & $$class.Constructor<TInstance & B, TPrototype & B> & ThisType<$$class.PickProperty<B, 'prototype'> & TInstance>)} A prototype object which extends the prototype of provided base class.
+     * @template TInstance - The type of the constructed instance.
+     * @template TPrototype - The type of inheriting prototype.
+     * @param {B} base - The constructor object of the base class.
+     * @param {(TPrototype & ThisType<$$class.PickProperty<B, 'prototype'> & TInstance>)} derived - A prototype object for the members of the derived class.
+     * @return {($$class.PickProperty<B, 'prototype'> & $$class.Constructor<TInstance & B, TPrototype & B> & ThisType<$$class.PickProperty<B, 'prototype'> & TInstance>)} A class constructor object which extends the base class.
      * @memberof Object
      */
     extendsObject<B extends Function, TInstance, TPrototype extends TInstance = TInstance>(base: B, derived: TPrototype & ThisType<$$class.PickProperty<B, 'prototype'> & TInstance>):
         $$class.PickProperty<B, 'prototype'> & $$class.Constructor<TInstance & B, TPrototype & B> & ThisType<$$class.PickProperty<B, 'prototype'> & TInstance>;
 }
 
+/**
+ * The base custom class type.
+ * @typedef {$$class.ClassConstructor} Class
+ */
 declare const Class: $$class.ClassConstructor;
