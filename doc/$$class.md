@@ -139,7 +139,7 @@ namespace my_app_scope {
         constructor.myStaticMethod = function(...args: string[]): MyClass[] {
             var result: MyClass[] = [];
             for (var n of args)
-                result.push(new Myclass((typeof n) === 'string' ? n : undefined);
+                result.push(new Myclass((typeof n) === 'string' ? n : undefined));
             return result;
         };
 
